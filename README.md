@@ -1,4 +1,4 @@
-# Projeto VEXPENSES CONTACT
+# Projeto de TCC
 
 Projeto criado com Laravel 8, utilizando PHP 7.4 e MYSQL.
 
