@@ -73,7 +73,7 @@
 
 </head>
 
-<body class="@yield('classes_body')" @yield('body_data') style="background-image: url('/img/fundo-login.jpg'); background-repeat: no-repeat;  background-size: cover; background-attachment: fixed; background-position: center center;">
+<body class="@yield('classes_body')" @yield('body_data') style="background-image: url('/img/dog.jpg'); background-repeat: no-repeat;  background-size: cover; background-attachment: fixed; background-position: center center;">
 
     {{-- Body Content --}}
     @yield('body')

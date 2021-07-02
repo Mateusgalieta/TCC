@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'Agenda Vexpenses',
-    'title_prefix' => 'Vexpenses - Agenda -',
+    'title' => 'Animals Software',
+    'title_prefix' => 'Animals Software',
     'title_postfix' => '',
 
     /*
@@ -226,7 +226,7 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
+            'search' => false,
             'topnav' => true,
         ],
         [
@@ -246,22 +246,6 @@ return [
                 [
                     'text' => 'Adicionar Categoria',
                     'route' => 'category.register',
-                    'icon'  => 'fas fa-plus-square',
-                ],
-            ]
-        ],
-        [
-            'text'        => 'Contato',
-            'icon'        => 'fas fa-id-card-alt',
-            'submenu'     => [
-                [
-                    'text' => 'Listar Contatos',
-                    'route' => 'contact.index',
-                    'icon'  => 'fas fa-list',
-                ],
-                [
-                    'text' => 'Adicionar Contato',
-                    'route' => 'contact.register',
                     'icon'  => 'fas fa-plus-square',
                 ],
             ]

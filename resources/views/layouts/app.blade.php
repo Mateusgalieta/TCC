@@ -6,7 +6,7 @@
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy;  <a href="http://github.com/mateusgalieta/">VEXPENSES</a>.</strong> Todos os direitos reservados.
+        <strong>Copyright &copy;  <a href="http://github.com/Mateusgalieta/TCC">ANIMALS SOFTWARE</a>.</strong> Todos os direitos reservados.
     </footer>
 @endsection
 

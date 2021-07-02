@@ -41,30 +41,3 @@ Route::post('/categories/create', [App\Http\Controllers\CategoriesController::cl
 Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'edit'])->name('category.edit');
 Route::put('/categories/{id}/update', [App\Http\Controllers\CategoriesController::class, 'update'])->name('category.update');
 Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController::class, 'destroy'])->name('category.destroy');
-
-//Contacts Routes
-Route::get('/contacts', [App\Http\Controllers\ContactsController::class, 'index'])->name('contact.index');
-Route::get('/contacts/autocomplete', [App\Http\Controllers\ContactsController::class, 'autocomplete'])->name('contact.autocomplete');
-Route::get('/contacts/register', [App\Http\Controllers\ContactsController::class, 'register'])->name('contact.register');
-Route::post('/contacts/create', [App\Http\Controllers\ContactsController::class, 'create'])->name('contact.create');
-Route::get('/contacts/{id}/edit', [App\Http\Controllers\ContactsController::class, 'edit'])->name('contact.edit');
-Route::put('/contacts/{id}/update', [App\Http\Controllers\ContactsController::class, 'update'])->name('contact.update');
-Route::get('/contacts/{id}/delete', [App\Http\Controllers\ContactsController::class, 'destroy'])->name('contact.destroy');
-Route::get('/contacts/import', [App\Http\Controllers\ContactsController::class, 'import'])->name('contact.import');
-Route::post('/contacts/import/process', [App\Http\Controllers\ContactsController::class, 'importProcess'])->name('contact.import.process');
-
-//Phones Routes
-Route::get('/contact/{contact_id}/phones', [App\Http\Controllers\PhonesController::class, 'index'])->name('phone.index');
-Route::get('/contact/{contact_id}/phones/register', [App\Http\Controllers\PhonesController::class, 'register'])->name('phone.register');
-Route::post('/contact/{contact_id}/phones/create', [App\Http\Controllers\PhonesController::class, 'create'])->name('phone.create');
-Route::get('/contact/{contact_id}/phones/{id}/edit', [App\Http\Controllers\PhonesController::class, 'edit'])->name('phone.edit');
-Route::put('/contact/{contact_id}/phones/{id}/update', [App\Http\Controllers\PhonesController::class, 'update'])->name('phone.update');
-Route::get('/contact/{contact_id}/phones/{id}/delete', [App\Http\Controllers\PhonesController::class, 'destroy'])->name('phone.destroy');
-
-//Address Routes
-Route::get('/contact/{contact_id}/addresses', [App\Http\Controllers\AddressesController::class, 'index'])->name('address.index');
-Route::get('/contact/{contact_id}/addresses/register', [App\Http\Controllers\AddressesController::class, 'register'])->name('address.register');
-Route::post('/contact/{contact_id}/addresses/create', [App\Http\Controllers\AddressesController::class, 'create'])->name('address.create');
-Route::get('/contact/{contact_id}/addresses/{id}/edit', [App\Http\Controllers\AddressesController::class, 'edit'])->name('address.edit');
-Route::put('/contact/{contact_id}/addresses/{id}/update', [App\Http\Controllers\AddressesController::class, 'update'])->name('address.update');
-Route::get('/contact/{contact_id}/addresses/{id}/delete', [App\Http\Controllers\AddressesController::class, 'destroy'])->name('address.destroy');
