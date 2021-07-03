@@ -17,6 +17,9 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
+            $table->datetime('rescue_hour')->nullable();
+            $table->string('rescuer_name')->nullable(); //em caso de API
+            $table->string('partner_organization')->nullable(); //em caso de API
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
