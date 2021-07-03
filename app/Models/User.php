@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Department;
+use App\Models\Organization;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -56,4 +58,13 @@ class User extends Authenticatable
 
 
     /*  Table Relationships  */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

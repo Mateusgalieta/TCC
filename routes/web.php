@@ -41,3 +41,35 @@ Route::post('/categories/create', [App\Http\Controllers\CategoriesController::cl
 Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoriesController::class, 'edit'])->name('category.edit');
 Route::put('/categories/{id}/update', [App\Http\Controllers\CategoriesController::class, 'update'])->name('category.update');
 Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController::class, 'destroy'])->name('category.destroy');
+
+//Departments Routes
+Route::get('/departments', [App\Http\Controllers\DepartmentsController::class, 'index'])->name('department.index');
+Route::get('/departments/register', [App\Http\Controllers\DepartmentsController::class, 'register'])->name('department.register');
+Route::post('/departments/create', [App\Http\Controllers\DepartmentsController::class, 'create'])->name('department.create');
+Route::get('/departments/{id}/edit', [App\Http\Controllers\DepartmentsController::class, 'edit'])->name('department.edit');
+Route::put('/departments/{id}/update', [App\Http\Controllers\DepartmentsController::class, 'update'])->name('department.update');
+Route::get('/departments/{id}/delete', [App\Http\Controllers\DepartmentsController::class, 'destroy'])->name('department.destroy');
+
+//Organizations Routes
+Route::get('/organizations', [App\Http\Controllers\OrganizationsController::class, 'index'])->name('organization.index');
+Route::get('/organizations/register', [App\Http\Controllers\OrganizationsController::class, 'register'])->name('organization.register');
+Route::post('/organizations/create', [App\Http\Controllers\OrganizationsController::class, 'create'])->name('organization.create');
+Route::get('/organizations/{id}/edit', [App\Http\Controllers\OrganizationsController::class, 'edit'])->name('organization.edit');
+Route::put('/organizations/{id}/update', [App\Http\Controllers\OrganizationsController::class, 'update'])->name('organization.update');
+Route::get('/organizations/{id}/delete', [App\Http\Controllers\OrganizationsController::class, 'destroy'])->name('organization.destroy');
+
+//Addresses Routes
+Route::get('/addresses', [App\Http\Controllers\AddressesController::class, 'index'])->name('address.index');
+Route::get('/addresses/register', [App\Http\Controllers\AddressesController::class, 'register'])->name('address.register');
+Route::post('/addresses/create', [App\Http\Controllers\AddressesController::class, 'create'])->name('address.create');
+Route::get('/addresses/{id}/edit', [App\Http\Controllers\AddressesController::class, 'edit'])->name('address.edit');
+Route::put('/addresses/{id}/update', [App\Http\Controllers\AddressesController::class, 'update'])->name('address.update');
+Route::get('/addresses/{id}/delete', [App\Http\Controllers\AddressesController::class, 'destroy'])->name('address.destroy');
+
+//Animals Routes
+Route::get('/animals', [App\Http\Controllers\AnimalsController::class, 'index'])->name('animal.index');
+Route::get('/animals/register', [App\Http\Controllers\AnimalsController::class, 'register'])->name('animal.register');
+Route::post('/animals/create', [App\Http\Controllers\AnimalsController::class, 'create'])->name('animal.create');
+Route::get('/animals/{id}/edit', [App\Http\Controllers\AnimalsController::class, 'edit'])->name('animal.edit');
+Route::put('/animals/{id}/update', [App\Http\Controllers\AnimalsController::class, 'update'])->name('animal.update');
+Route::get('/animals/{id}/delete', [App\Http\Controllers\AnimalsController::class, 'destroy'])->name('animal.destroy');

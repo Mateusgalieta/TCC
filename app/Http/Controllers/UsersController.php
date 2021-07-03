@@ -25,10 +25,12 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $data = $request->all();
+        $organization_id = auth()->user()->organization()->id;
+
         if(isset($data['search']))
-            $users_list = User::where('name', 'like', '%'. $data['search']. '%')->where('id', '!=', auth()->user()->id)->paginate();
+            $users_list = User::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->where('id', '!=', auth()->user()->id)->paginate();
         else
-            $users_list = User::where('id', '!=', auth()->user()->id)->paginate();
+            $users_list = User::where('id', '!=', auth()->user()->id)->where('organization_id', $organization_id)->paginate();
 
         return view('user.index', [
             'users_list' => $users_list ?? [],
@@ -53,7 +55,6 @@ class UsersController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-
         $user = User::create($data);
 
         activity()->log('O User ID'. $user->id . ' foi criado.');

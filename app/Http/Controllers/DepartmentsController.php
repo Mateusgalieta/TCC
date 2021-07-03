@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Category;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class DepartmentsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Show the Category Index.
+     * Show the Department Index.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -29,27 +29,27 @@ class CategoriesController extends Controller
         $organization_id = auth()->user()->organization()->id;
 
         if(isset($data['search']))
-            $categories_list = Category::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->paginate();
+            $department_list = Department::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->paginate();
         else
-            $categories_list = Category::where('organization_id', $organization_id)->paginate();
+            $department_list = Department::where('organization_id', $organization_id)->paginate();
 
-        return view('category.index', [
-            'categories_list' => $categories_list ?? [],
+        return view('department.index', [
+            'department_list' => $department_list ?? [],
         ]);
     }
 
     /**
-     * Redirect to Register Category page
+     * Redirect to Register Department page
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function register()
     {
-        return view('category.register');
+        return view('department.register');
     }
 
     /**
-     * Create new Category on the System
+     * Create new Department on the System
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -62,12 +62,12 @@ class CategoriesController extends Controller
         $organization_id = auth()->user()->organization()->id;
 
         if($data){
-            $category = Category::create(['name' => $data['name'], 'organization_id' => $organization_id]);
+            $department = Department::create(['name' => $data['name'], 'organization_id' => $organization_id]);
             $response = [
                 'status' => 'success',
                 'message' => "Criado com sucesso!",
             ];
-            activity()->log('Categoria ID'. $category->id . ' foi criado.');
+            activity()->log('Departamento ID'. $department->id . ' foi criado.');
         }
         else {
             $response = [
@@ -80,51 +80,52 @@ class CategoriesController extends Controller
     }
 
      /**
-     * edit page Category on the System
+     * edit page Department on the System
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function edit($category_id)
+    public function edit($department_id)
     {
-        $category = Category::findOrFail($category_id);
+        $department = Department::findOrFail($department_id);
 
-        return view('category.edit', [
-            'category' => $category ?? null,
+        return view('department.edit', [
+            'department' => $department ?? null,
         ]);
     }
 
     /**
-     * Update Category on the System
+     * Update Department on the System
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function update(Request $request, $category_id)
+    public function update(Request $request, $department_id)
     {
         $data = $request->all();
 
-        $category = Category::findOrFail($category_id);
-        $category->update($data);
+        $department = Department::findOrFail($department_id);
+        $department->update($data);
 
-        activity()->log('Categoria ID'. $category->id . ' foi atualizado.');
+        activity()->log('Departamento ID'. $department->id . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
-        return redirect()->route('category.index');
+        return redirect()->route('department.index');
     }
 
     /**
-     * Delete Category on the System
+     * Delete Department on the System
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function destroy($category_id)
+    public function destroy($department_id)
     {
-        $category = Category::findOrFail($category_id);
-        $category->delete();
+        $department = Department::findOrFail($department_id);
+        $department->delete();
 
-        activity()->log('Categoria ID'. $category->id . ' foi deletado.');
+        activity()->log('Departamento ID'. $department->id . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();
     }
 
 }
+
