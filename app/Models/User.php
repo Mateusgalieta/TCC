@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'birthday_date',
+        'born_date',
+        'department_id',
+        'organization_id',
     ];
 
     /**
@@ -49,7 +51,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
-        'deleted_at'
+        'deleted_at', 'born_date'
     ];
 
 

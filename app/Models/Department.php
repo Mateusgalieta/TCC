@@ -7,9 +7,9 @@ use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Department extends Model
 {
-    use HasFactory;
+    use Notifiable, SoftDeletes;
 
      /**
      * The attributes that are mass assignable.
@@ -46,9 +46,9 @@ class Category extends Model
     ];
 
     /*  Table Relationships  */
-
     public function organization()
     {
         return $this->belongsTo(Organization::class);
     }
+
 }

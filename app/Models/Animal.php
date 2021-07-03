@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Animal extends Model
 {
-    use HasFactory;
+    use Notifiable, SoftDeletes;
 
      /**
      * The attributes that are mass assignable.
@@ -17,7 +18,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'organization_id'
+        'name', 'code', 'rescue_hour', 'rescuer_name', 'partner_organization', 'organization_id', 'category_id', 'created_by'
     ];
 
     /**
@@ -46,9 +47,18 @@ class Category extends Model
     ];
 
     /*  Table Relationships  */
-
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

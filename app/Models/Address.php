@@ -19,7 +19,7 @@ class Address extends Model
      * @var array
      */
     protected $fillable = [
-        'cep', 'address', 'neighborhood', 'city', 'state', 'contact_id'
+        'cep', 'address', 'neighborhood', 'city', 'state', 'origin', 'animal_id', 'user_id', 'organization_id'
     ];
 
     /**
