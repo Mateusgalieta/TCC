@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Animal;
 use App\Models\Contact;
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -48,10 +50,20 @@ class Address extends Model
         'deleted_at', 'created_at'
     ];
 
-     /*  Table Relationships  */
-     public function contact()
-     {
-         return $this->belongsTo(Contact::class);
-     }
+    /*  Table Relationships  */
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class, 'animal_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
+    }
 
 }

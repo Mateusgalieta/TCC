@@ -250,7 +250,40 @@ return [
                 ],
             ]
         ],
+        [
+            'text'        => 'Animais',
+            'icon'        => 'fas fa-paw',
+            'submenu'     => [
+                [
+                    'text' => 'Listar Animais',
+                    'route' => 'animal.index',
+                    'icon'  => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Adicionar Categoria',
+                    'route' => 'animal.register',
+                    'icon'  => 'fas fa-plus-square',
+                ],
+            ]
+        ],
+
         ['header' => 'account_settings'],
+        [
+            'text' => 'Departamentos',
+            'icon' => 'fas fa-building',
+            'submenu' => [
+                [
+                    'text' => 'Listar Departamentos',
+                    'route' => 'department.index',
+                    'icon'  => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Adicionar Usuário',
+                    'route' => 'department.register',
+                    'icon'  => 'fas fa-user-plus',
+                ],
+            ]
+        ],
         [
             'text' => 'Usuários',
             'icon' => 'fas fa-users',

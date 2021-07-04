@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Address;
 use App\Models\Category;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
@@ -60,5 +61,10 @@ class Animal extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function rescueAddress()
+    {
+        return $this->belongsTo(Address::class);
     }
 }
