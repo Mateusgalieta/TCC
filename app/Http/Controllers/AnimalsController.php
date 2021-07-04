@@ -64,7 +64,7 @@ class AnimalsController extends Controller
         ]);
 
         $data = $request->all();
-        $organization_id = auth()->user()->organization()->id;
+        $organization_id = auth()->user()->organization->id;
 
         if($data){
             $animal = Animal::create($data);

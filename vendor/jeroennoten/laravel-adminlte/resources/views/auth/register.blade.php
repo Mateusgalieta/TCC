@@ -13,9 +13,35 @@
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
+@php(
+    $organization_list = App\Models\Organization::all()
+)
+
+
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
         {{ csrf_field() }}
+
+        {{-- Organization field --}}
+        <div class="input-group mb-3">
+            <select name="organization_id" required class="form-control">
+                <option>Selecione a Organização</option>
+                @foreach ($organization_list ?? [] as $organization)
+                    <option value="{{ $organization->id }}">{{ $organization->name }}</option>
+                @endforeach
+            </select>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-building {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @if($errors->has('organization'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('organization') }}</strong>
+                </div>
+            @endif
+        </div>
 
         {{-- Name field --}}
         <div class="input-group mb-3">

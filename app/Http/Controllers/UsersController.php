@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -115,6 +116,40 @@ class UsersController extends Controller
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();
+    }
+
+    /**
+     * New User from Register/Login Page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function newRegister(Request $request)
+    {
+        $data = $request->validate([
+            'organization' => 'required',
+            'name' => 'required|string',
+            'password' => 'required',
+            'password_confirmation' => 'required',
+        ]);
+
+        $data = $request->all();
+        $organization = Organization::findOrFail($data['organization']);
+
+
+        if($data){
+            if($data['password'] === 'password_confirmation'){
+                $user = User::create($data);
+
+                activity()->log('Usuário ID'. $user->id . ' foi criado.');
+                activity()->log('Usuario '. $user->name . ' foi adcionado na organização ' . $organization->name);
+
+                session()->flash('alert-success', 'Criado com sucesso!');
+                return redirect()->route('animal.index');
+            }
+        }
+
+        session()->flash('alert-danger', 'Ocorreu um erro');
+        return redirect()->route('animal.index');
     }
 
 }
