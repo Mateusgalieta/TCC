@@ -7,6 +7,7 @@ use App\Models\Address;
 use App\Models\Category;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Animal extends Model
