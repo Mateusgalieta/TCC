@@ -26,7 +26,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $data = $request->all();
-        $organization_id = auth()->user()->organization()->id;
+        $organization_id = auth()->user()->organization_id;
 
         if(isset($data['search']))
             $categories_list = Category::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->paginate();
@@ -59,7 +59,7 @@ class CategoriesController extends Controller
             'name' => 'required|string',
         ]);
 
-        $organization_id = auth()->user()->organization()->id;
+        $organization_id = auth()->user()->organization_id;
 
         if($data){
             $category = Category::create(['name' => $data['name'], 'organization_id' => $organization_id]);

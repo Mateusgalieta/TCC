@@ -26,7 +26,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $data = $request->all();
-        $organization_id = auth()->user()->organization()->id;
+        $organization_id = auth()->user()->organization_id;
 
         if(isset($data['search']))
             $users_list = User::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->where('id', '!=', auth()->user()->id)->paginate();

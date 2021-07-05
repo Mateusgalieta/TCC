@@ -28,7 +28,7 @@ class AnimalsController extends Controller
     public function index(Request $request)
     {
         $data = $request->all();
-        $organization_id = auth()->user()->organization()->id;
+        $organization_id = auth()->user()->organization_id;
 
         if(isset($data['search']))
             $animal_list = Animal::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->paginate();
@@ -64,7 +64,8 @@ class AnimalsController extends Controller
         ]);
 
         $data = $request->all();
-        $organization_id = auth()->user()->organization->id;
+        $organization_id = auth()->user()->organization_id;
+
 
         if($data){
             $animal = Animal::create($data);
