@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use AddressOrigin;
 use App\Models\User;
 use App\Models\Animal;
+use App\Models\Category;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,11 @@ class AnimalsController extends Controller
      */
     public function register()
     {
-        return view('animal.register');
+        $organization_id = auth()->user()->organization_id;
+
+        return view('animal.register', [
+            'category_list' => Category::where('organization_id', $organization_id)->get(),
+        ]);
     }
 
     /**
@@ -60,12 +65,13 @@ class AnimalsController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'code' => 'required|string',
-            'rescuer_name'  => 'required|string',
+            'category_id'  => 'required',
         ]);
+
+        dd($data);
 
         $data = $request->all();
         $organization_id = auth()->user()->organization_id;
-
 
         if($data){
             $animal = Animal::create($data);
@@ -99,10 +105,12 @@ class AnimalsController extends Controller
      */
     public function edit($animal_id)
     {
+        $organization_id = auth()->user()->organization_id;
         $animal = Animal::findOrFail($animal_id);
 
         return view('animal.edit', [
             'animal' => $animal ?? null,
+            'category_list' => Category::where('organization_id', $organization_id)->get() ?? [],
         ]);
     }
 

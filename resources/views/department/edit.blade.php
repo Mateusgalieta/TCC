@@ -34,7 +34,7 @@
             <div class="card-body">
                 {!!  Form::open(['route' => ['department.update', $department->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
-                        <label for="inputName">Nome da Categoria</label>
+                        <label for="inputName">Nome da Departamento</label>
                         {!! Form::text('name', $department ? $department->name : '', ['class' => 'form-control', 'placeholder' => 'Nome', 'required' => true]); !!}
                     </div>
             </div>
