@@ -59,60 +59,14 @@
           </div>
           <!-- /.card -->
         </div>
-      </div>
-
+    </div>
+        <input type="submit" id="saveBtn" value="Adicionar" class="btn btn-success float-right">
+        <div class="alert col-4" id="resultRequest" role="alert"></div>
     </section>
     <!-- /.content -->
 
-    <!-- Address content -->
-    <section class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-warning">
-              <div class="card-header">
-                <h3 class="card-title">Endereço de Resgate</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                    <div class="form-group">
-                        <label for="cep">CEP</label>
-                        {!! Form::text('cep', '', ['id' => 'cep', 'class' => 'form-control', 'placeholder' => 'CEP', 'required' => true]); !!}
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Endereço</label>
-                        {!! Form::text('address', '', ['id' => 'address', 'class' => 'form-control', 'placeholder' => 'Endereço', 'required' => true]); !!}
-                    </div>
-                    <div class="form-group">
-                        <label for="neighborhood">Bairro</label>
-                        {!! Form::text('neighborhood', '', ['id' => 'neighborhood', 'class' => 'form-control', 'placeholder' => 'Bairro', 'required' => true]); !!}
-                    </div>
-                    <div class="form-group">
-                        <label for="city">Cidade</label>
-                        {!! Form::text('city', '', ['id' => 'city', 'class' => 'form-control', 'placeholder' => 'Cidade', 'required' => true]); !!}
-                    </div>
-                    <div class="form-group">
-                        <label for="state">Estado</label>
-                        {!! Form::text('state', '', ['id' => 'state', 'class' => 'form-control', 'placeholder' => 'Estado', 'required' => true]); !!}
-                    </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-        <input type="submit" id="saveBtn" value="Adicionar" class="btn btn-success float-right">
 
-          <div class="alert col-4" id="resultRequest" role="alert">
-
-          </div>
-
-      </section>
-      <!-- /.Address Content -->
-
-      {!! Form::close() !!}
+    {!! Form::close() !!}
 
 
 

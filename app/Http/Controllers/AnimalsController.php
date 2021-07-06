@@ -68,30 +68,16 @@ class AnimalsController extends Controller
             'category_id'  => 'required',
         ]);
 
-        dd($data);
-
         $data = $request->all();
         $organization_id = auth()->user()->organization_id;
 
         if($data){
             $animal = Animal::create($data);
 
-            $address = Address::create([
-                'origin' => AddressOrigin::RESCUE,
-                'cep' => $data['cep'],
-                'address' => $data['address'],
-                'neighborhood' => $data['neighborhood'],
-                'city' => $data['city'],
-                'state' => $data['state'],
-                'organization_id' => $organization_id,
-                'animal_id' => $animal->id,
-            ]);
-
-            activity()->log('Animal ID'. $organization->id . ' foi criado.');
-            activity()->log('Endereço de resgate ID'. $address->id . ' foi criado.');
+            activity()->log('Animal ID'. $animal->id . ' foi criado.');
 
             session()->flash('alert-success', 'Criado com sucesso!');
-            return redirect()->route('animal.index');
+            return redirect()->route('address.register', [$animal->id]);
         }
 
         session()->flash('alert-danger', 'Ocorreu um erro');
