@@ -2,25 +2,10 @@
 
 namespace JeroenNoten\LaravelAdminLte\Menu\Filters;
 
-use JeroenNoten\LaravelAdminLte\Helpers\NavbarItemHelper;
-use JeroenNoten\LaravelAdminLte\Helpers\SidebarItemHelper;
+use JeroenNoten\LaravelAdminLte\Helpers\MenuItemHelper;
 
 class SearchFilter implements FilterInterface
 {
-    /**
-     * The default name attribute to be used on the search input.
-     *
-     * @var string
-     */
-    protected $defInputName = 'adminlteSearch';
-
-    /**
-     * The default method attribute to be used on the search input.
-     *
-     * @var string
-     */
-    protected $defMethod = 'get';
-
     /**
      * Transforms a menu item. Makes the proper search bar configuration.
      *
@@ -29,25 +14,22 @@ class SearchFilter implements FilterInterface
      */
     public function transform($item)
     {
-        $isSearch = NavbarItemHelper::isSearch($item) ||
-                    SidebarItemHelper::isSearch($item);
-
-        if (! $isSearch) {
+        if (! MenuItemHelper::isSearchBar($item)) {
             return $item;
         }
 
         // Configure search bar method.
 
         if (! isset($item['method'])) {
-            $item['method'] = $this->defMethod;
+            $item['method'] = 'get';
         } elseif (! in_array(strtolower($item['method']), ['post', 'get'])) {
-            $item['method'] = $this->defMethod;
+            $item['method'] = 'get';
         }
 
         // Configure search bar input name.
 
         if (! isset($item['input_name'])) {
-            $item['input_name'] = $this->defInputName;
+            $item['input_name'] = 'q';
         }
 
         return $item;

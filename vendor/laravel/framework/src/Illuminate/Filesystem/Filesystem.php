@@ -117,8 +117,6 @@ class Filesystem
      * @param  string  $path
      * @param  array  $data
      * @return mixed
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function requireOnce($path, array $data = [])
     {
@@ -328,8 +326,6 @@ class Filesystem
      * @param  string  $target
      * @param  string  $link
      * @return void
-     *
-     * @throws \RuntimeException
      */
     public function relativeLink($target, $link)
     {
@@ -393,8 +389,6 @@ class Filesystem
      *
      * @param  string  $path
      * @return string|null
-     *
-     * @throws \RuntimeException
      */
     public function guessExtension($path)
     {

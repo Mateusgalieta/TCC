@@ -125,11 +125,11 @@ class Response implements ArrayAccess
     /**
      * Get the effective URI of the response.
      *
-     * @return \Psr\Http\Message\UriInterface|null
+     * @return \Psr\Http\Message\UriInterface
      */
     public function effectiveUri()
     {
-        return optional($this->transferStats)->getEffectiveUri();
+        return $this->transferStats->getEffectiveUri();
     }
 
     /**
@@ -224,19 +224,7 @@ class Response implements ArrayAccess
      */
     public function handlerStats()
     {
-        return optional($this->transferStats)->getHandlerStats() ?? [];
-    }
-
-    /**
-     * Close the stream and any underlying resources.
-     *
-     * @return $this
-     */
-    public function close()
-    {
-        $this->response->getBody()->close();
-
-        return $this;
+        return $this->transferStats->getHandlerStats();
     }
 
     /**
@@ -247,18 +235,6 @@ class Response implements ArrayAccess
     public function toPsrResponse()
     {
         return $this->response;
-    }
-
-    /**
-     * Create an exception if a server or client error occurred.
-     *
-     * @return \Illuminate\Http\Client\RequestException|null
-     */
-    public function toException()
-    {
-        if ($this->failed()) {
-            return new RequestException($this);
-        }
     }
 
     /**
@@ -274,7 +250,7 @@ class Response implements ArrayAccess
         $callback = func_get_args()[0] ?? null;
 
         if ($this->failed()) {
-            throw tap($this->toException(), function ($exception) use ($callback) {
+            throw tap(new RequestException($this), function ($exception) use ($callback) {
                 if ($callback && is_callable($callback)) {
                     $callback($this, $exception);
                 }

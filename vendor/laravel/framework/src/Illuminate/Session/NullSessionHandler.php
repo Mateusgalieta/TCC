@@ -2,7 +2,6 @@
 
 namespace Illuminate\Session;
 
-use ReturnTypeWillChange;
 use SessionHandlerInterface;
 
 class NullSessionHandler implements SessionHandlerInterface
@@ -10,7 +9,6 @@ class NullSessionHandler implements SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
     public function open($savePath, $sessionName)
     {
         return true;
@@ -19,7 +17,6 @@ class NullSessionHandler implements SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
     public function close()
     {
         return true;
@@ -28,7 +25,6 @@ class NullSessionHandler implements SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
     public function read($sessionId)
     {
         return '';
@@ -37,7 +33,6 @@ class NullSessionHandler implements SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
     public function write($sessionId, $data)
     {
         return true;
@@ -46,7 +41,6 @@ class NullSessionHandler implements SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
     public function destroy($sessionId)
     {
         return true;
@@ -55,7 +49,6 @@ class NullSessionHandler implements SessionHandlerInterface
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
     public function gc($lifetime)
     {
         return true;

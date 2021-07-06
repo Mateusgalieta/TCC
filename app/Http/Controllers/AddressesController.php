@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\AddressOrigin;
 use App\Models\User;
 use App\Models\Phone;
-use App\Models\Animal;
 use App\Models\Address;
 use App\Models\Contact;
 use Illuminate\Http\Request;
@@ -48,11 +46,11 @@ class AddressesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function register($animal_id)
+    public function register($contact_id)
     {
-        $animal = Animal::findOrFail($animal_id);
-        return view('animal.address.register', [
-            'animal' => $animal ?? null,
+        $contact = Contact::findOrFail($contact_id);
+        return view('contact.address.register', [
+            'contact' => $contact ?? null,
         ]);
     }
 
@@ -61,7 +59,7 @@ class AddressesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function create(Request $request)
+    public function create(Request $request, $contact_id)
     {
         $data = $request->validate([
             'address' => 'required|string',
@@ -80,14 +78,13 @@ class AddressesController extends Controller
                 'neighborhood' => $data['neighborhood'],
                 'city' => $data['city'],
                 'state' => $data['state'],
-                'animal_id' => $data['animal_id'],
-                'origin' => AddressOrigin::RESCUE,
+                'contact_id' => $contact_id
             ]);
 
-            activity()->log('Endereço de Resgate ID'. $address->id . ' foi criado.');
+            activity()->log('Endereço ID'. $address->id . ' foi criado.');
 
             session()->flash('alert-success', 'Criado com sucesso!');
-            return redirect()->route('animal.index');
+            return redirect()->route('address.index', $contact_id);
         }
 
         session()->flash('alert-danger', 'Ocorreu um erro');

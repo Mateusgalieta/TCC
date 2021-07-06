@@ -51,7 +51,6 @@ The card component is the most widely used component through out this template. 
 
 ##### Card Variants
 {: .text-bold .text-dark .mt-5}
-
 You can change the style of the card by adding any of the contextual classes.
 
 ###### Default
@@ -509,7 +508,6 @@ You can change the style of the card by adding any of the contextual classes.
 
 ##### Card Tools
 {: .text-bold .text-dark .mt-5}
-
 Cards can contain tools to deploy a specific event or provide simple info. The following examples makes use of multiple AdminLTE components within the header of the card.
 
 AdminLTE data-card-widget attribute provides cards with the ability to collapse or be removed. The buttons are placed in the card-tools which is placed in the card-header. 
@@ -542,7 +540,6 @@ AdminLTE data-card-widget attribute provides cards with the ability to collapse 
 
 ##### Loading Style
 {: .text-bold .text-dark .mt-5}
-
 To simulate a loading state, simply place this code before the `.card` closing tag. 
 
 ```html
@@ -608,7 +605,6 @@ To simulate a loading state, simply place this code before the `.card` closing t
 
 
 You can also use a dark loading style with adding `.dark` to `.overlay` like this code.
-
 ```html
 <div class="overlay dark">
   <i class="fas fa-2x fa-sync-alt fa-spin"></i>

@@ -99,7 +99,7 @@ class QuestionHelper extends Helper
     /**
      * Asks the question to the user.
      *
-     * @return mixed
+     * @return bool|mixed|string|null
      *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
      */
@@ -109,6 +109,11 @@ class QuestionHelper extends Helper
 
         $inputStream = $this->inputStream ?: \STDIN;
         $autocomplete = $question->getAutocompleterCallback();
+
+        if (\function_exists('sapi_windows_cp_set')) {
+            // Codepage used by cmd.exe on Windows to allow special characters (éàüñ).
+            @sapi_windows_cp_set(1252);
+        }
 
         if (null === $autocomplete || !self::$stty || !Terminal::hasSttyAvailable()) {
             $ret = false;
@@ -205,10 +210,10 @@ class QuestionHelper extends Helper
     {
         $messages = [];
 
-        $maxWidth = max(array_map('self::width', array_keys($choices = $question->getChoices())));
+        $maxWidth = max(array_map('self::strlen', array_keys($choices = $question->getChoices())));
 
         foreach ($choices as $key => $value) {
-            $padding = str_repeat(' ', $maxWidth - self::width($key));
+            $padding = str_repeat(' ', $maxWidth - self::strlen($key));
 
             $messages[] = sprintf("  [<$tag>%s$padding</$tag>] %s", $key, $value);
         }
@@ -306,7 +311,7 @@ class QuestionHelper extends Helper
                         $remainingCharacters = substr($ret, \strlen(trim($this->mostRecentlyEnteredValue($fullChoice))));
                         $output->write($remainingCharacters);
                         $fullChoice .= $remainingCharacters;
-                        $i = (false === $encoding = mb_detect_encoding($fullChoice, null, true)) ? \strlen($fullChoice) : mb_strlen($fullChoice, $encoding);
+                        $i = self::strlen($fullChoice);
 
                         $matches = array_filter(
                             $autocomplete($ret),
@@ -509,10 +514,7 @@ class QuestionHelper extends Helper
     private function readInput($inputStream, Question $question)
     {
         if (!$question->isMultiline()) {
-            $cp = $this->setIOCodepage();
-            $ret = fgets($inputStream, 4096);
-
-            return $this->resetIOCodepage($cp, $ret);
+            return fgets($inputStream, 4096);
         }
 
         $multiLineStreamReader = $this->cloneInputStream($inputStream);
@@ -521,7 +523,6 @@ class QuestionHelper extends Helper
         }
 
         $ret = '';
-        $cp = $this->setIOCodepage();
         while (false !== ($char = fgetc($multiLineStreamReader))) {
             if (\PHP_EOL === "{$ret}{$char}") {
                 break;
@@ -529,44 +530,7 @@ class QuestionHelper extends Helper
             $ret .= $char;
         }
 
-        return $this->resetIOCodepage($cp, $ret);
-    }
-
-    /**
-     * Sets console I/O to the host code page.
-     *
-     * @return int Previous code page in IBM/EBCDIC format
-     */
-    private function setIOCodepage(): int
-    {
-        if (\function_exists('sapi_windows_cp_set')) {
-            $cp = sapi_windows_cp_get();
-            sapi_windows_cp_set(sapi_windows_cp_get('oem'));
-
-            return $cp;
-        }
-
-        return 0;
-    }
-
-    /**
-     * Sets console I/O to the specified code page and converts the user input.
-     *
-     * @param string|false $input
-     *
-     * @return string|false
-     */
-    private function resetIOCodepage(int $cp, $input)
-    {
-        if (0 !== $cp) {
-            sapi_windows_cp_set($cp);
-
-            if (false !== $input && '' !== $input) {
-                $input = sapi_windows_cp_conv(sapi_windows_cp_get('oem'), $cp, $input);
-            }
-        }
-
-        return $input;
+        return $ret;
     }
 
     /**

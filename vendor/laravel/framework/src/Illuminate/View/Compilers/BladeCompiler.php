@@ -4,7 +4,6 @@ namespace Illuminate\View\Compilers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Illuminate\Support\Traits\ReflectsClosures;
 use InvalidArgumentException;
 
 class BladeCompiler extends Compiler implements CompilerInterface
@@ -23,8 +22,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
         Concerns\CompilesLoops,
         Concerns\CompilesRawPhp,
         Concerns\CompilesStacks,
-        Concerns\CompilesTranslations,
-        ReflectsClosures;
+        Concerns\CompilesTranslations;
 
     /**
      * All of the registered extensions.
@@ -155,11 +153,9 @@ class BladeCompiler extends Compiler implements CompilerInterface
                 $contents = $this->appendFilePath($contents);
             }
 
-            $this->ensureCompiledDirectoryExists(
-                $compiledPath = $this->getCompiledPath($this->getPath())
+            $this->files->put(
+                $this->getCompiledPath($this->getPath()), $contents
             );
-
-            $this->files->put($compiledPath, $contents);
         }
     }
 
@@ -253,10 +249,6 @@ class BladeCompiler extends Compiler implements CompilerInterface
         // template inheritance via the extends keyword that should be appended.
         if (count($this->footer) > 0) {
             $result = $this->addFooters($result);
-        }
-
-        if (! empty($this->echoHandlers)) {
-            $result = $this->addBladeCompilerVariable($result);
         }
 
         return str_replace(

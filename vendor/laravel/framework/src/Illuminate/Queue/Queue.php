@@ -143,7 +143,6 @@ abstract class Queue
             'job' => 'Illuminate\Queue\CallQueuedHandler@call',
             'maxTries' => $job->tries ?? null,
             'maxExceptions' => $job->maxExceptions ?? null,
-            'failOnTimeout' => $job->failOnTimeout ?? false,
             'backoff' => $this->getJobBackoff($job),
             'timeout' => $job->timeout ?? null,
             'retryUntil' => $this->getJobExpiration($job),
@@ -158,10 +157,10 @@ abstract class Queue
                     : serialize(clone $job);
 
         return array_merge($payload, [
-            'data' => array_merge($payload['data'], [
+            'data' => [
                 'commandName' => get_class($job),
                 'command' => $command,
-            ]),
+            ],
         ]);
     }
 
@@ -245,7 +244,6 @@ abstract class Queue
             'job' => $job,
             'maxTries' => null,
             'maxExceptions' => null,
-            'failOnTimeout' => false,
             'backoff' => null,
             'timeout' => null,
             'data' => $data,
@@ -369,16 +367,6 @@ abstract class Queue
         $this->connectionName = $name;
 
         return $this;
-    }
-
-    /**
-     * Get the container instance being used by the connection.
-     *
-     * @return \Illuminate\Container\Container
-     */
-    public function getContainer()
-    {
-        return $this->container;
     }
 
     /**

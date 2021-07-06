@@ -67,8 +67,6 @@ class Schedule
      *
      * @param  \DateTimeZone|string|null  $timezone
      * @return void
-     *
-     * @throws \RuntimeException
      */
     public function __construct($timezone = null)
     {
@@ -153,8 +151,6 @@ class Schedule
      * @param  string|null  $queue
      * @param  string|null  $connection
      * @return void
-     *
-     * @throws \RuntimeException
      */
     protected function dispatchToQueue($job, $queue, $connection)
     {
@@ -305,8 +301,6 @@ class Schedule
      * Get the job dispatcher, if available.
      *
      * @return \Illuminate\Contracts\Bus\Dispatcher
-     *
-     * @throws \RuntimeException
      */
     protected function getDispatcher()
     {

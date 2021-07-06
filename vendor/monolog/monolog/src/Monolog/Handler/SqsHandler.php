@@ -41,7 +41,9 @@ class SqsHandler extends AbstractProcessingHandler
     }
 
     /**
-     * {@inheritdoc}
+     * Writes the record down to the log of the implementing handler.
+     *
+     * @param array $record
      */
     protected function write(array $record): void
     {

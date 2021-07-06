@@ -197,8 +197,6 @@ trait Queueable
      *
      * @param  mixed  $job
      * @return string
-     *
-     * @throws \RuntimeException
      */
     protected function serializeJob($job)
     {

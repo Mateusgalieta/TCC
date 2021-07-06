@@ -405,8 +405,6 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
      *
      * @param  string  $locale
      * @return void
-     *
-     * @throws \InvalidArgumentException
      */
     public function setLocale($locale)
     {

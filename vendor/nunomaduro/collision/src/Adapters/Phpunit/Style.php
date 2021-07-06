@@ -185,10 +185,6 @@ final class Style
             '/vendor\/laravel\/dusk/',
             '/vendor\/laravel\/framework\/src\/Illuminate\/Testing/',
             '/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Testing/',
-            '/vendor\/symfony\/phpunit-bridge/',
-            '/vendor\/bin\/.phpunit/',
-            '/bin\/.phpunit/',
-            '/vendor\/sulu\/sulu\/src\/Sulu\/Bundle\/TestBundle\/Testing/',
         ]);
 
         if ($throwable instanceof ExceptionWrapper && $throwable->getOriginalException() !== null) {

@@ -36,18 +36,32 @@
         <div class="content-wrapper {{ config('adminlte.classes_content_wrapper') ?? '' }}">
 
             {{-- Content Header --}}
-            @hasSection('content_header')
-                <div class="content-header">
-                    <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }}">
-                        @yield('content_header')
-                    </div>
+            <div class="content-header">
+                <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }}">
+                    @yield('content_header')
                 </div>
-            @endif
+            </div>
 
             {{-- Main Content --}}
             <div class="content">
                 <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
                     @yield('content')
+                    @if(session('alert-success'))
+                        <div class="alert col-4 alert-success" role="alert">
+                            {{ session('alert-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if(session('alert-danger'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('alert-danger') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
 
