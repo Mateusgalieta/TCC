@@ -63,7 +63,7 @@ Route::get('/organizations/{id}/delete', [App\Http\Controllers\OrganizationsCont
 
 //Addresses Routes
 Route::get('/addresses', [App\Http\Controllers\AddressesController::class, 'index'])->name('address.index');
-Route::get('/addresses/register', [App\Http\Controllers\AddressesController::class, 'register'])->name('address.register');
+Route::get('/addresses/register/{id}', [App\Http\Controllers\AddressesController::class, 'register'])->name('address.register');
 Route::post('/addresses/create', [App\Http\Controllers\AddressesController::class, 'create'])->name('address.create');
 Route::get('/addresses/{id}/edit', [App\Http\Controllers\AddressesController::class, 'edit'])->name('address.edit');
 Route::put('/addresses/{id}/update', [App\Http\Controllers\AddressesController::class, 'update'])->name('address.update');
