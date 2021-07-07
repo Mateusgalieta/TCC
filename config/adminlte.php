@@ -46,11 +46,11 @@ return [
     */
 
     'logo' => '',
-    'logo_img' => '/img/vexpenses-logo.png',
+    'logo_img' => '/img/logo.png',
     'logo_img_class' => 'img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => '/img/vexpenses-logo.png',
+    'logo_img_alt' => '/img/logo.png',
 
     /*
     |--------------------------------------------------------------------------

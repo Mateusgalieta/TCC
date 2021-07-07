@@ -20311,6 +20311,7 @@ html.maximized-card {
   font-weight: 300;
   margin-bottom: .9rem;
   text-align: center;
+  border-radius: 50% !important;
 }
 
 .login-logo a,
