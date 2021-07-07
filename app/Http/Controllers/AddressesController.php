@@ -81,10 +81,13 @@ class AddressesController extends Controller
                 'city' => $data['city'],
                 'state' => $data['state'],
                 'animal_id' => $data['animal_id'],
-                'origin' => AddressOrigin::RESCUE,
+                'origin' => 2,
             ]);
 
             activity()->log('Endereço de Resgate ID'. $address->id . ' foi criado.');
+
+            $animal = Animal::findOrFail($data['animal_id']);
+            $animal->update(['address_id' => $address->id]);
 
             session()->flash('alert-success', 'Criado com sucesso!');
             return redirect()->route('animal.index');
@@ -100,14 +103,12 @@ class AddressesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function edit($contact_id, $address_id)
+    public function edit($address_id)
     {
-        $contact = Contact::findOrFail($contact_id);
         $address = Address::findOrFail($address_id);
 
-        return view('contact.address.edit', [
+        return view('animal.address.edit', [
             'address' => $address ?? null,
-            'contact' => $contact ?? null,
         ]);
     }
 
@@ -116,7 +117,7 @@ class AddressesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function update(Request $request, $contact_id, $address_id)
+    public function update(Request $request, $address_id)
     {
         $data = $request->all();
 

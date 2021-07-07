@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\Enum\Laravel\Enum;
+use Spatie\Enum\Enum;
 
 class AddressOrigin extends Enum
 {

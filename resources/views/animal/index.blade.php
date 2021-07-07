@@ -37,14 +37,23 @@
                 @foreach ($animal_list ?? [] as $animal)
                     <tbody>
                         <tr>
+                            <td>{{ $animal->code ?? '' }}</td>
                             <td>{{ $animal->name ?? '' }}</td>
+                            <td>{{ $animal->category->name ?? '' }}</td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-info btn-sm" href="{{ route('animal.edit', $department->id) }}">
+                                <a class="btn btn-info btn-sm" href="{{ route('animal.edit', $animal->id) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Editar
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="{{ route('animal.destroy', $department->id) }}">
+                                @if ($animal->rescueAddress)
+                                    <a class="btn btn-warning btn-sm" href="{{ route('address.edit', $animal->rescueAddress->id) }}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Editar Endereço
+                                    </a>
+                                @endif
+                                <a class="btn btn-danger btn-sm" href="{{ route('animal.destroy', $animal->id) }}">
                                     <i class="fas fa-trash">
                                     </i>
                                     Excluir

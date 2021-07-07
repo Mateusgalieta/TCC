@@ -260,7 +260,7 @@ return [
                     'icon'  => 'fas fa-list',
                 ],
                 [
-                    'text' => 'Adicionar Categoria',
+                    'text' => 'Adicionar Animal',
                     'route' => 'animal.register',
                     'icon'  => 'fas fa-plus-square',
                 ],

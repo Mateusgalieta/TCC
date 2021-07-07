@@ -21,7 +21,7 @@ class Animal extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'rescue_hour', 'rescuer_name', 'partner_organization', 'organization_id', 'category_id', 'created_by'
+        'name', 'code', 'rescue_hour', 'rescuer_name', 'partner_organization', 'organization_id', 'category_id', 'created_by', 'address_id'
     ];
 
     /**
@@ -67,6 +67,6 @@ class Animal extends Model
 
     public function rescueAddress()
     {
-        return $this->belongsTo(Address::class);
+        return $this->belongsTo(Address::class, 'address_id');
     }
 }
