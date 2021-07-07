@@ -50,7 +50,7 @@
                                     <a class="btn btn-warning btn-sm" href="{{ route('address.edit', $animal->rescueAddress->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-                                        Editar Endereço
+                                        End. Resgate
                                     </a>
                                 @endif
                                 <a class="btn btn-danger btn-sm" href="{{ route('animal.destroy', $animal->id) }}">

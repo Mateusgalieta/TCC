@@ -137,7 +137,7 @@ class AddressesController extends Controller
         activity()->log('Endereço ID'. $address->id . ' foi editado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
-        return redirect()->route('address.index', $contact_id);
+        return redirect()->route('animal.index');
     }
 
     /**
