@@ -41,7 +41,7 @@ class CategoriesController extends Controller
 
         $response = [
             'success' => false,
-            'message' => 'Não existe usuários cadastrados',
+            'message' => 'Não existe categorias cadastradas',
             'data' => $getCategories
         ];
         $response = json_encode($response);
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function update(CategoryRequest $request, $category_id)
+    public function update(Request $request, $category_id)
     {
         $data = $request->all();
         $category = Category::findOrFail($category_id);

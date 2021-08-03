@@ -25,6 +25,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'organization_id' => 'required',
         ];
     }
 
@@ -37,6 +38,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name.required'  =>  'O nome é obrigatório',
+            'organization_id.required'  =>  'O envio de organization_id é obrigatório',
         ];
     }
 }
