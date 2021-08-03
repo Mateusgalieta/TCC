@@ -6,21 +6,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use App\Services\Contracts\UserServiceInterface;
 use App\Services\Params\User\RegisterServiceParams;
 
 class UsersController extends Controller
 {
-    protected $userService;
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UserServiceInterface $userService)
+    public function __construct()
     {
-        $this->userService = $userService;
     }
 
     /**
@@ -33,26 +29,22 @@ class UsersController extends Controller
         $getUsers = User::all();
 
         if ($getUsers->count() > 0) {
-            return response($getUsers, 200);
+            $response = [
+                'success' => true,
+                'data' => $getUsers
+            ];
+            $response = json_encode($response);
+            return response($response, 200);
         }
 
-        return response($getUsers, 401);
-    }
+        $response = [
+            'success' => false,
+            'message' => 'Não existe usuários cadastrados',
+            'data' => $getUsers
+        ];
+        $response = json_encode($response);
 
-    /**
-     * Get User to Response
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getUser(int $id)
-    {
-        $getUser = $this->userService->find($id);
-
-        if ($getUser->success == true) {
-            return response($getUser, 200);
-        }
-
-        return response($getUser, 401);
+        return response($response, 401);
     }
 
     /**
@@ -62,20 +54,17 @@ class UsersController extends Controller
      */
     public function create(UserRequest $request)
     {
-        $params = new RegisterServiceParams(
-            $request->name,
-            $request->email,
-            $request->password,
-            $request->birthdayDate,
-        );
+        $data = $request->all();
+        $user = User::create($data);
 
-        $registerUserResponse = $this->userService->register($params);
+        $response = [
+            'success' => true,
+            'message' => "Criado com sucesso!",
+            'data' => $user
+        ];
 
-        if ($registerUserResponse->success == true) {
-            return response($registerUserResponse, 200);
-        }
-
-        return response($registerUserResponse, 401);
+        $response = json_encode($response);
+        return response($response, 200);
     }
 
     /**
@@ -85,20 +74,29 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, $userId)
     {
-        $params = new RegisterServiceParams(
-            $request->name,
-            $request->email,
-            $request->password,
-            $request->birthdayDate,
-        );
+        $data = $request->all();
+        $user = User::findOrFail($userId);
 
-        $updateUserResponse = $this->userService->update($params, $userId);
+        if ($user) {
+            $user->update($data);
 
-        if ($updateUserResponse->success == true) {
-            return response($updateUserResponse, 200);
+            $response = [
+                'success' => true,
+                'message' => "Atualizado com sucesso!",
+                'data' => $user
+            ];
+
+            $response = json_encode($response);
+            return response($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Usuário não encontrado'
+            ];
+
+            $response = json_encode($response);
+            return response($response, 401);
         }
-
-        return response($updateUserResponse, 401);
     }
 
     /**
@@ -108,12 +106,25 @@ class UsersController extends Controller
      */
     public function destroy($userId)
     {
-        $destroyUserResponse = $this->userService->delete($userId);
+        $user = User::findOrFail($userId);
 
-        if ($destroyUserResponse->success == true) {
-            return response($destroyUserResponse, 200);
+        if ($user){
+            $user->delete();
+            $response = [
+                'success' => true,
+                'message' => "Deletado com sucesso!"
+            ];
+
+            $response = json_encode($response);
+            return response($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => "Usuário não encontrado."
+            ];
+
+            $response = json_encode($response);
+            return response($response, 401);
         }
-
-        return response($destroyUserResponse, 401);
     }
 }
