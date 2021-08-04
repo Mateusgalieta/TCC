@@ -46,3 +46,10 @@ Route::name('animal.')->group(function () {
     Route::put('/animals/{id}/update', ['as' => 'update', 'uses' => 'API\AnimalsController@update']);
     Route::delete('/animals/{id}/delete', ['as' => 'destroy', 'uses' => 'API\AnimalsController@destroy']);
 });
+
+//Address Rescue Routes
+Route::name('address.')->group(function () {
+    Route::get('/animals/{id}/addressRescue', ['as' => 'getAddress', 'uses' => 'API\AnimalsController@getAddress']);
+    Route::post('/animals/addressRescue/create', ['as' => 'addressRescue', 'uses' => 'API\AnimalsController@createAddress']);
+    Route::put('/animals/{id}/addressRescue/update', ['as' => 'updateAddress', 'uses' => 'API\AnimalsController@updateAddress']);
+});
