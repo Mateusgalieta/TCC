@@ -20,11 +20,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//Laravel UI package Routes
 Auth::routes();
 
-
-// Route::post('new-register/create', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('user.newRegister');
-
+//Auth Users Routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile');
 Route::post('/profile/update', [App\Http\Controllers\ProfilesController::class, 'update'])->name('profile.update');
