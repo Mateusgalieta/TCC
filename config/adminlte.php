@@ -278,7 +278,7 @@ return [
                     'icon'  => 'fas fa-list',
                 ],
                 [
-                    'text' => 'Adicionar Usuário',
+                    'text' => 'Adicionar Departamento',
                     'route' => 'department.register',
                     'icon'  => 'fas fa-user-plus',
                 ],
