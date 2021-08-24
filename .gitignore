@@ -2,6 +2,10 @@
 /public/hot
 /public/storage
 /storage/*.key
+/vendor/*
+!/vendor/jeroennoten
+!/vendor/almasaeed2010
+!/vendor/spatie
 .env
 .env.backup
 .phpunit.result.cache
