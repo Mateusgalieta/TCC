@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Department;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 
@@ -45,7 +46,10 @@ class UsersController extends Controller
      */
     public function register()
     {
-        return view('user.register');
+        $department_list = Department::where('organization_id', auth()->user()->organization_id)->get();
+        return view('user.register', [
+            'department_list' => $department_list
+        ]);
     }
 
     /**
@@ -56,6 +60,7 @@ class UsersController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
+        $data['organization_id'] = auth()->user()->organization_id;
         $user = User::create($data);
 
         activity()->log('O User ID'. $user->id . ' foi criado.');
@@ -72,9 +77,11 @@ class UsersController extends Controller
     public function edit($user_id)
     {
         $user = User::findOrFail($user_id);
+        $department_list = Department::where('organization_id', auth()->user()->organization_id)->get();
 
         return view('user.edit', [
             'user' => $user ?? null,
+            'department_list' => $department_list
         ]);
     }
 

@@ -32,6 +32,7 @@
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Data de Nascimento</th>
+                    <th>Departamento</th>
                   </tr>
                 </thead>
                 @foreach ($users_list ?? [] as $user)
@@ -40,6 +41,7 @@
                             <td>{{ $user->name ?? '' }}</td>
                             <td>{{ $user->email ?? '' }}</td>
                             <td>{{ \Carbon\Carbon::createFromDate($user->birthday_date)->format('d/m/Y') ?? '' }}</td>
+                            <td>{{ $user->department ? $user->department->name : '-' }}</td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->id) }}">
                                     <i class="fas fa-pencil-alt">

@@ -33,6 +33,18 @@
             </div>
             <div class="card-body">
                 {!!  Form::open(['route' => ['user.update', $user->id], 'method' => 'PUT', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="type">Departamento</label>
+                        </div>
+                        <select required name="department_id" class="custom-select" id="type">
+                            @foreach ($department_list ?? [] as $department)
+                                <option {{ $department->id == $user->department->id ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
                     <div class="col-sm-10">
