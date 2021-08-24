@@ -69,6 +69,8 @@ class OrganizationsController extends Controller
 
             activity()->log('Organização ID'. $organization->id . ' foi criado.');
 
+            $token = $organization->createToken($request->name)->plainTextToken;
+
             session()->flash('alert-success', 'Criado com sucesso!');
             return redirect()->route('organization.index');
         }
