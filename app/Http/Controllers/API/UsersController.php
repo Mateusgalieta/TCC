@@ -20,7 +20,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Get User to Response
+     * Get All User to Response
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -40,6 +40,34 @@ class UsersController extends Controller
         $response = [
             'success' => false,
             'message' => 'Não existe usuários cadastrados',
+            'data' => $getUsers
+        ];
+        $response = json_encode($response);
+
+        return response($response, 401);
+    }
+
+    /**
+     * Get User to Response
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getUser($user_id)
+    {
+        $getUsers = User::findOrFail($user_id);
+
+        if ($getUsers->count() > 0) {
+            $response = [
+                'success' => true,
+                'data' => $getUsers
+            ];
+            $response = json_encode($response);
+            return response($response, 200);
+        }
+
+        $response = [
+            'success' => false,
+            'message' => 'Não existe usuário com esse id',
             'data' => $getUsers
         ];
         $response = json_encode($response);
