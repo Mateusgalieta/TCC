@@ -6,6 +6,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use JeroenNoten\LaravelAdminLte\Console\AdminLteInstallCommand;
 use JeroenNoten\LaravelAdminLte\Console\AdminLtePluginCommand;
@@ -16,6 +17,65 @@ use JeroenNoten\LaravelAdminLte\Http\ViewComposers\AdminLteComposer;
 
 class AdminLteServiceProvider extends BaseServiceProvider
 {
+    /**
+     * Array with the available layout components.
+     *
+     * @var array
+     */
+    protected $layoutComponents = [
+        Components\Layout\NavbarDarkmodeWidget::class,
+        Components\Layout\NavbarNotification::class,
+    ];
+
+    /**
+     * Array with the available form components.
+     *
+     * @var array
+     */
+    protected $formComponents = [
+        Components\Form\Button::class,
+        Components\Form\DateRange::class,
+        Components\Form\Input::class,
+        Components\Form\InputColor::class,
+        Components\Form\InputDate::class,
+        Components\Form\InputFile::class,
+        Components\Form\InputSlider::class,
+        Components\Form\InputSwitch::class,
+        Components\Form\Options::class,
+        Components\Form\Select::class,
+        Components\Form\Select2::class,
+        Components\Form\SelectBs::class,
+        Components\Form\Textarea::class,
+        Components\Form\TextEditor::class,
+    ];
+
+    /**
+     * Array with the available tool components.
+     *
+     * @var array
+     */
+    protected $toolComponents = [
+        Components\Tool\Datatable::class,
+        Components\Tool\Modal::class,
+    ];
+
+    /**
+     * Array with the available widget components.
+     *
+     * @var array
+     */
+    protected $widgetComponents = [
+        Components\Widget\Alert::class,
+        Components\Widget\Callout::class,
+        Components\Widget\Card::class,
+        Components\Widget\InfoBox::class,
+        Components\Widget\ProfileColItem::class,
+        Components\Widget\ProfileRowItem::class,
+        Components\Widget\ProfileWidget::class,
+        Components\Widget\Progress::class,
+        Components\Widget\SmallBox::class,
+    ];
+
     /**
      * Register the package services.
      *
@@ -48,6 +108,8 @@ class AdminLteServiceProvider extends BaseServiceProvider
         $this->registerCommands();
         $this->registerViewComposers($view);
         $this->registerMenu($events, $config);
+        $this->loadComponents();
+        $this->loadRoutes();
     }
 
     /**
@@ -86,7 +148,7 @@ class AdminLteServiceProvider extends BaseServiceProvider
     /**
      * Get the absolute path to some package resource.
      *
-     * @param string $path The relative path to the resource
+     * @param  string  $path  The relative path to the resource
      * @return string
      */
     private function packagePath($path)
@@ -137,5 +199,55 @@ class AdminLteServiceProvider extends BaseServiceProvider
                 $event->menu->add(...$menu);
             }
         );
+    }
+
+    /**
+     * Load the blade view components.
+     *
+     * @return void
+     */
+    private function loadComponents()
+    {
+        // Support of x-components is only available for Laravel >= 7.x
+        // versions. So, we check if we can load components.
+
+        $canLoadComponents = method_exists(
+            'Illuminate\Support\ServiceProvider',
+            'loadViewComponentsAs'
+        );
+
+        if (! $canLoadComponents) {
+            return;
+        }
+
+        // Load all the blade-x components.
+
+        $components = array_merge(
+            $this->layoutComponents,
+            $this->formComponents,
+            $this->toolComponents,
+            $this->widgetComponents
+        );
+
+        $this->loadViewComponentsAs('adminlte', $components);
+    }
+
+    /**
+     * Load the package web routes.
+     *
+     * @return void
+     */
+    private function loadRoutes()
+    {
+        $routesCfg = [
+            'as' => 'adminlte.',
+            'prefix' => 'adminlte',
+            'middleware' => ['web'],
+        ];
+
+        Route::group($routesCfg, function () {
+            $routesPath = $this->packagePath('routes/web.php');
+            $this->loadRoutesFrom($routesPath);
+        });
     }
 }
