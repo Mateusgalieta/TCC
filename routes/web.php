@@ -75,3 +75,6 @@ Route::post('/animals/create', [App\Http\Controllers\AnimalsController::class, '
 Route::get('/animals/{id}/edit', [App\Http\Controllers\AnimalsController::class, 'edit'])->name('animal.edit');
 Route::put('/animals/{id}/update', [App\Http\Controllers\AnimalsController::class, 'update'])->name('animal.update');
 Route::get('/animals/{id}/delete', [App\Http\Controllers\AnimalsController::class, 'destroy'])->name('animal.destroy');
+
+Route::get('/rescue/register', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('rescue.index');
+
