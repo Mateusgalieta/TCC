@@ -17,49 +17,113 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            .background {
+                background-image: url('/img/dog.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center center;
+            }
         </style>
     </head>
 
-    <body style="background-image: url('/img/dog.jpg'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: center center;">
-        {{-- <div class="container align-middle">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="type">Categoria</label>
-                    </div>
-                    <select required name="category_id" class="custom-select" id="type">
-                        @foreach ($organizations ?? [] as $organization)
-                            <option value="{{ $organization->id }}">{{ $organization->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </div> --}}
+    <body class="background">
         <div class="container h-100" style="margin-top: 80px;">
-            <div class="row h-100 justify-content-center align-items-center">
-                <h1 style="text-align: center; color: #FFF">Resgate de Animais</h1>
-                <form class="col-12 mt-3">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="type">Categoria</label>
+            {!!  Form::open(['route' => ['rescue.create'], 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'registerForm', 'enctype' => 'multipart/form-data']) !!}
+                <div class="row h-100 justify-content-center align-items-center">
+                    <h1 style="text-align: center; color: #FFF">Denuncia de Resgate de Animais</h1>
+                    <div class="col-12 mt-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Nome do denunciador</label>
+                                <div class="form-group col-12">
+                                    {!! Form::text('denunciator', '', ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
+                                </div>
                             </div>
-                            <select required name="organization" class="form-control">
-                                @foreach ($organizations ?? [] as $organization)
-                                    <option value="{{ $organization->id }}">{{ $organization->name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="col-6">
+                                <div class="form-group col-12 mt-4">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="type">ONG responsável</label>
+                                        </div>
+                                        <select required name="organization" class="form-control">
+                                            @foreach ($organizations ?? [] as $organization)
+                                                <option value="{{ $organization->id }}">{{ $organization->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group mt-3 col-6">
+                                <label>Nome do denunciador</label>
+                                {!! Form::text('denunciator', '', ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
+                            </div>
+                            <div class="form-group mt-3 col-6">
+                                <label>Nome do Animal</label>
+                                {!! Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Nome', 'required' => true]); !!}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group mt-3 col-6">
+                                <label for="cep">CEP</label>
+                                {!! Form::text('cep', '', ['id' => 'cep', 'class' => 'form-control', 'placeholder' => 'CEP', 'required' => true]); !!}
+                            </div>
+                            <div class="form-group mt-3 col-6">
+                                <label for="address">Endereço</label>
+                                {!! Form::text('address', '', ['id' => 'address', 'class' => 'form-control', 'placeholder' => 'Endereço', 'required' => true]); !!}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group mt-3 col-4">
+                                <label for="neighborhood">Bairro</label>
+                                {!! Form::text('neighborhood', '', ['id' => 'neighborhood', 'class' => 'form-control', 'placeholder' => 'Bairro', 'required' => true]); !!}
+                            </div>
+                            <div class="form-group mt-3 col-4">
+                                <label for="state">Estado</label>
+                                {!! Form::text('state', '', ['id' => 'state', 'class' => 'form-control', 'placeholder' => 'Estado', 'required' => true]); !!}
+                            </div>
+                            <div class="form-group mt-3 col-4">
+                                <label for="city">Cidade</label>
+                                {!! Form::text('city', '', ['id' => 'city', 'class' => 'form-control', 'placeholder' => 'Cidade', 'required' => true]); !!}
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group mt-3">
-                        <label>Nome do denunciador</label>
-                        {!! Form::text('denunciator', '', ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
-
-                        <label class="mt-3">Nome do Animal</label>
-                        {!! Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Nome', 'required' => true]); !!}
-                    </div>
-                </form>
-            </div>
-          </div>
+                    <input type="submit" id="saveBtn" value="Adicionar" class="btn btn-success float-right mt-3">
+                </div>
+            {!! Form::close() !!}
+        </div>
     </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#cep").blur(function(){
+            var cep = $(this).val().replace(/[^0-9]/, '');
+            if(cep){
+                var url = 'https://correiosapi.apphb.com/cep/' + cep;
+                var url = 'https://viacep.com.br/ws/' + cep + '/json/';
+                $.ajax({
+                        url: url,
+                        dataType: 'jsonp',
+                        crossDomain: true,
+                        contentType: "application/json",
+                        success : function(json){
+                            if(json.localidade){
+                                $("#address").val(json.logradouro);
+                                $("#neighborhood").val(json.bairro);
+                                $("#city").val(json.localidade);
+                                $("#state").val(json.uf);
+                            }
+                        }
+                });
+            }
+        });
+    });
+</script>

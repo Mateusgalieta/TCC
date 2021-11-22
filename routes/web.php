@@ -77,4 +77,6 @@ Route::put('/animals/{id}/update', [App\Http\Controllers\AnimalsController::clas
 Route::get('/animals/{id}/delete', [App\Http\Controllers\AnimalsController::class, 'destroy'])->name('animal.destroy');
 
 Route::get('/rescue/register', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('rescue.index');
+Route::post('/rescue/create', [App\Http\Controllers\Site\RescueController::class, 'create'])->name('rescue.create');
+
 
