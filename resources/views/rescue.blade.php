@@ -37,7 +37,7 @@
                             <div class="col-6">
                                 <label>Nome do denunciador</label>
                                 <div class="form-group col-12">
-                                    {!! Form::text('denunciator', '', ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
+                                    {!! Form::text('reporter', '', ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
                                 </div>
                             </div>
                             <div class="col-6">
@@ -46,7 +46,7 @@
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="type">ONG responsável</label>
                                         </div>
-                                        <select required name="organization" class="form-control">
+                                        <select required name="organization_id" class="form-control">
                                             @foreach ($organizations ?? [] as $organization)
                                                 <option value="{{ $organization->id }}">{{ $organization->name }}</option>
                                             @endforeach
@@ -58,38 +58,40 @@
 
                         <div class="row">
                             <div class="form-group mt-3 col-6">
-                                <label>Nome do denunciador</label>
-                                {!! Form::text('denunciator', '', ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
-                            </div>
-                            <div class="form-group mt-3 col-6">
                                 <label>Nome do Animal</label>
                                 {!! Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Nome', 'required' => true]); !!}
                             </div>
-                        </div>
-
-                        <div class="row">
                             <div class="form-group mt-3 col-6">
                                 <label for="cep">CEP</label>
                                 {!! Form::text('cep', '', ['id' => 'cep', 'class' => 'form-control', 'placeholder' => 'CEP', 'required' => true]); !!}
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="form-group mt-3 col-6">
                                 <label for="address">Endereço</label>
                                 {!! Form::text('address', '', ['id' => 'address', 'class' => 'form-control', 'placeholder' => 'Endereço', 'required' => true]); !!}
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group mt-3 col-4">
+                            <div class="form-group mt-3 col-6">
                                 <label for="neighborhood">Bairro</label>
                                 {!! Form::text('neighborhood', '', ['id' => 'neighborhood', 'class' => 'form-control', 'placeholder' => 'Bairro', 'required' => true]); !!}
                             </div>
-                            <div class="form-group mt-3 col-4">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group mt-3 col-6">
                                 <label for="state">Estado</label>
                                 {!! Form::text('state', '', ['id' => 'state', 'class' => 'form-control', 'placeholder' => 'Estado', 'required' => true]); !!}
                             </div>
-                            <div class="form-group mt-3 col-4">
+                            <div class="form-group mt-3 col-6">
                                 <label for="city">Cidade</label>
                                 {!! Form::text('city', '', ['id' => 'city', 'class' => 'form-control', 'placeholder' => 'Cidade', 'required' => true]); !!}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group mt-3 col-12">
+                                <label>Observações adicional</label>
+                                {!! Form::textarea('observations', '', ['class' => 'form-control', 'placeholder' => 'Observações Adicionais', 'required' => false]); !!}
                             </div>
                         </div>
                     </div>
