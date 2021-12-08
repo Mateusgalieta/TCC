@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
@@ -24,7 +25,10 @@ class ProfilesController extends Controller
      */
     public function index()
     {
+        $personal_logs = ActivityLog::where('causer_id', auth()->user()->id)->paginate();
+
         return view('profile', [
+            'personal_logs' => $personal_logs
         ]);
     }
 
