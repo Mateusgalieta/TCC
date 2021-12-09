@@ -266,6 +266,22 @@ return [
                 ],
             ]
         ],
+        [
+            'text'        => 'Resgates',
+            'icon'        => 'fas fa-first-aid',
+            'submenu'     => [
+                [
+                    'text' => 'Listar Resgates',
+                    'route' => 'rescue.list',
+                    'icon'  => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Adicionar Resgate',
+                    'route' => 'rescue.register',
+                    'icon'  => 'fas fa-plus-square',
+                ],
+            ]
+        ],
 
         ['header' => 'account_settings'],
         [
