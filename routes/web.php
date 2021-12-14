@@ -79,16 +79,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/animals/{id}/delete', [App\Http\Controllers\AnimalsController::class, 'destroy'])->name('animal.destroy');
 
     //Rescue Routes
-    Route::get('/rescue', [App\Http\Controllers\RescuesController::class, 'list'])->name('rescue.list');
-    Route::get('/rescue/register', [App\Http\Controllers\RescuesController::class, 'register'])->name('rescue.register');
-    Route::post('/rescue/create', [App\Http\Controllers\RescuesController::class, 'create'])->name('rescue.create');
-    Route::get('/rescue/{id}/edit', [App\Http\Controllers\RescuesController::class, 'edit'])->name('rescue.edit');
-    Route::put('/rescue/{id}/update', [App\Http\Controllers\RescuesController::class, 'update'])->name('rescue.update');
-    Route::get('/rescue/{id}/delete', [App\Http\Controllers\RescuesController::class, 'destroy'])->name('rescue.destroy');
+    Route::get('/rescue', [App\Http\Controllers\RescuesController::class, 'index'])->name('rescue.intern.list');
+    Route::get('/rescue/register', [App\Http\Controllers\RescuesController::class, 'register'])->name('rescue.intern.register');
+    Route::post('/rescue/create', [App\Http\Controllers\RescuesController::class, 'create'])->name('rescue.intern.create');
+    Route::get('/rescue/{id}/edit', [App\Http\Controllers\RescuesController::class, 'edit'])->name('rescue.intern.edit');
+    Route::put('/rescue/{id}/update', [App\Http\Controllers\RescuesController::class, 'update'])->name('rescue.intern.update');
+    Route::get('/rescue/{id}/delete', [App\Http\Controllers\RescuesController::class, 'destroy'])->name('rescue.intern.destroy');
 
 });
 
-Route::get('/rescue/index', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('rescue.index');
-Route::post('/rescue/create', [App\Http\Controllers\Site\RescueController::class, 'create'])->name('rescue.create');
+// Route::get('/rescue/index', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('rescue.index');
+// Route::post('/rescue/create', [App\Http\Controllers\Site\RescueController::class, 'create'])->name('rescue.create');
 
 

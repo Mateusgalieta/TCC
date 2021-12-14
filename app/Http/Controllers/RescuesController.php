@@ -53,6 +53,34 @@ class RescuesController extends Controller
         if($data){
             $rescue = Rescue::create($data);
 
+            if($data){
+                $animal = Animal::create([
+                    'name' => $data['name'],
+                    'rescuer_name' => $data['reporter'],
+                    'organization_id' => auth()->user()->organization_id
+                ]);
+
+                $address = Address::create([
+                    'address' => $data['address'],
+                    'cep' => $data['cep'],
+                    'neighborhood' => $data['neighborhood'],
+                    'city' => $data['city'],
+                    'state' => $data['state'],
+                    'animal_id' => $animal->id,
+                    'origin' => 2,
+                ]);
+
+                $animal->update(['address_id' => $address->id]);
+
+                $rescue = Rescue::create([
+                    'reporter' => $data['reporter'],
+                    'animal_name' => $data['name'],
+                    'organization_id' => auth()->user()->organization_id,
+                    'address_id' => $address->id,
+                    'animal_id' => $animal->id,
+                ]);
+            }
+
             activity()->log('Resgate ID ' . $rescue->id . ' foi criado.');
 
             session()->flash('alert-success', 'Criado com sucesso!');
@@ -85,9 +113,27 @@ class RescuesController extends Controller
     public function update(Request $request, $rescue_id)
     {
         $data = $request->all();
-
         $rescue = Rescue::findOrFail($rescue_id);
-        $rescue->update($data);
+
+        if($data && $rescue){
+            $rescue->animal->update([
+                'name' => $data['name'],
+                'rescuer_name' => $data['reporter'],
+            ]);
+
+            $rescue->address->update([
+                'address' => $data['address'],
+                'cep' => $data['cep'],
+                'neighborhood' => $data['neighborhood'],
+                'city' => $data['city'],
+                'state' => $data['state'],
+            ]);
+
+            $rescue->update([
+                'reporter' => $data['reporter'],
+                'animal_name' => $data['name'],
+            ]);
+        }
 
         activity()->log('Resgate ID ' . $rescue->id  . ' foi atualizado.');
 
