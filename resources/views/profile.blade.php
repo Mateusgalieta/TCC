@@ -32,18 +32,16 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                     <img class="profile-user-img img-fluid img-circle"
-                        src="/img/vexpenses-logo.png"
-                        alt="Logo Sistema">
+                        src="/img/logo-profile.png"
+                        alt="Logo di Sistema"
+                        style="max-width: 150px;">
                     </div>
 
                     <h3 class="profile-username text-center">{{ auth()->user()->name }}</h3>
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>E-mail</b> <a class="float-right">{{ auth()->user()->name }}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Data de Nascimento</b> <a class="float-right">{{ \Carbon\Carbon::createFromDate(auth()->user()->birthday_date)->format('d/m/Y') }}</a>
+                            <b>E-mail</b> <a class="float-right">{{ auth()->user()->email }}</a>
                         </li>
                     </ul>
 
@@ -83,7 +81,10 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                            </table>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            {{ $personal_logs->links() }}
+                        </div>
                     </div>
                     <!-- /.tab-pane -->
 
@@ -107,12 +108,12 @@
                                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Senha', 'required' => false]); !!}
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="inputSkills" class="col-sm-2 col-form-label">Data de Nascimento</label>
                                 <div class="col-sm-10">
                                     {!! Form::date('birthday_date', auth()->user()->birthday_date ? auth()->user()->birthday_date : '', ['class' => 'form-control', 'required' => true]) !!}
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-10">
                                     <button type="submit" class="btn btn-danger">Alterar</button>

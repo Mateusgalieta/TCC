@@ -19,7 +19,7 @@ class Rescue extends Model
      * @var array
      */
     protected $fillable = [
-        'reporter', 'animal_name', 'organization_id', 'address_id', 'observations'
+        'reporter', 'animal_name', 'organization_id', 'address_id', 'observations', 'animal_id'
     ];
 
     /**

@@ -63,6 +63,9 @@
                     </tbody>
                 @endforeach
               </table>
+                <div class="d-flex justify-content-center">
+                    {{ $animal_list->links() }}
+                </div>
             </div>
             <!-- /.card-body -->
           </div>

@@ -35,11 +35,11 @@
                     {!!  Form::open(['route' => ['rescue.intern.create'], 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'registerForm', 'enctype' => 'multipart/form-data']) !!}
                         <div class="form-group">
                             <label for="reporter">Nome do denunciador (Opcional)</label>
-                            {!! Form::text('reporter', $rescue->name, ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
+                            {!! Form::text('reporter', $rescue->reporter, ['class' => 'form-control', 'placeholder' => 'Nome do denunciador (Opcional)', 'required' => false]); !!}
                         </div>
                         <div class="form-group">
                                 <label for="name">Nome do Animal</label>
-                                {!! Form::text('name', $rescue->animal ? $rescue->animal->name : '', ['class' => 'form-control', 'placeholder' => 'Nome do Animal', 'required' => true]); !!}
+                                {!! Form::text('name', $rescue->animal_name ?? '', ['class' => 'form-control', 'placeholder' => 'Nome do Animal', 'required' => true]); !!}
                         </div>
                         <div class="form-group">
                             <label for="cep">CEP</label>

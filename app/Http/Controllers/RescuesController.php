@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Animal;
 use App\Models\Rescue;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
 class RescuesController extends Controller
@@ -24,7 +26,7 @@ class RescuesController extends Controller
      */
     public function index()
     {
-        $rescues_list = Rescue::where('organization_id', auth()->user()->organization_id);
+        $rescues_list = Rescue::where('organization_id', auth()->user()->organization_id)->paginate();
 
         return view('rescue.index', [
             'rescues_list' => $rescues_list ?? [],
@@ -84,11 +86,11 @@ class RescuesController extends Controller
             activity()->log('Resgate ID ' . $rescue->id . ' foi criado.');
 
             session()->flash('alert-success', 'Criado com sucesso!');
-            return redirect()->route('rescue.index');
+            return redirect()->route('rescue.intern.list');
         }
 
         session()->flash('alert-danger', 'Ocorreu um erro');
-        return redirect()->route('rescue.index');
+        return redirect()->route('rescue.intern.list');
     }
 
      /**
@@ -138,7 +140,7 @@ class RescuesController extends Controller
         activity()->log('Resgate ID ' . $rescue->id  . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
-        return redirect()->route('rescue.index');
+        return redirect()->route('rescue.intern.list');
     }
 
     /**

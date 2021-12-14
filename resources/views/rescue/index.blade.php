@@ -39,7 +39,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $rescue->reporter ?? '' }}</td>
-                            <td>{{ $rescue->animal ? $rescue->animal->name : '' }}</td>
+                            <td>{{ $rescue->animal_name ?? '' }}</td>
                             <td>{{ $rescue->address ? $rescue->address->city : '' }}</td>
                             <td>{{ $rescue->address ? $rescue->address->state : '' }}</td>
                             <td class="project-actions text-right">
@@ -58,6 +58,9 @@
                     </tbody>
                 @endforeach
               </table>
+                <div class="d-flex justify-content-center">
+                    {{ $rescues_list->links() }}
+                </div>
             </div>
             <!-- /.card-body -->
           </div>

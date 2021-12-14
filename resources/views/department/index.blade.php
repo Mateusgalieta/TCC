@@ -52,6 +52,9 @@
                     </tbody>
                 @endforeach
               </table>
+                <div class="d-flex justify-content-center">
+                    {{ $department_list->links() }}
+                </div>
             </div>
             <!-- /.card-body -->
           </div>

@@ -272,12 +272,12 @@ return [
             'submenu'     => [
                 [
                     'text' => 'Listar Resgates',
-                    'route' => 'rescue.list',
+                    'route' => 'rescue.intern.list',
                     'icon'  => 'fas fa-list',
                 ],
                 [
                     'text' => 'Adicionar Resgate',
-                    'route' => 'rescue.register',
+                    'route' => 'rescue.intern.register',
                     'icon'  => 'fas fa-plus-square',
                 ],
             ]
