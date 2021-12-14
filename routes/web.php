@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-// Route::get('/rescue/index', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('rescue.index');
-// Route::post('/rescue/create', [App\Http\Controllers\Site\RescueController::class, 'create'])->name('rescue.create');
+Route::get('/rescue/site', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('site.rescue.index');
+Route::post('/rescue/site/create', [App\Http\Controllers\Site\RescueController::class, 'create'])->name('site.rescue.create');
 
 

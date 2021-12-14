@@ -74,12 +74,10 @@ class RescueController extends Controller
 
             activity()->log('Resgate ID'. $rescue->id . ' foi criado.');
 
-            session()->flash('alert-success', 'Criado com sucesso!');
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Resgate Criado com sucesso!');
         }
 
-        session()->flash('alert-danger', 'Ocorreu um erro');
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Ocorreu um erro');
     }
 
 }
