@@ -16,7 +16,7 @@ use App\Http\Controllers\ProfilesController;
 */
 
 
-Route::get('/', function () {
+Route::get('/backoffice', function () {
     return view('auth.login');
 });
 
@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/rescue/site', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('site.rescue.index');
+Route::get('/', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('site.rescue.index');
 Route::post('/rescue/site/create', [App\Http\Controllers\Site\RescueController::class, 'create'])->name('site.rescue.create');
 
 

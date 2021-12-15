@@ -46,30 +46,21 @@ class RescueController extends Controller
         $data = $request->all();
 
         if($data){
-            $animal = Animal::create([
-                'name' => $data['name'],
-                'rescuer_name' => $data['reporter'],
-                'organization_id' => $data['organization_id']
-            ]);
-
             $address = Address::create([
                 'address' => $data['address'],
                 'cep' => $data['cep'],
                 'neighborhood' => $data['neighborhood'],
                 'city' => $data['city'],
                 'state' => $data['state'],
-                'animal_id' => $animal->id,
                 'origin' => 2,
             ]);
-
-            $animal->update(['address_id' => $address->id]);
 
             $rescue = Rescue::create([
                 'reporter' => $data['reporter'],
                 'animal_name' => $data['name'],
                 'organization_id' => $data['organization_id'],
                 'address_id' => $address->id,
-                'animal_id' => $animal->id,
+                'status' => 'AGUARDANDO'
             ]);
 
             activity()->log('Resgate ID'. $rescue->id . ' foi criado.');
