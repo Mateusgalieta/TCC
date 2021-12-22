@@ -276,6 +276,11 @@ return [
                     'icon'  => 'fas fa-list',
                 ],
                 [
+                    'text' => 'Resgates Pendentes',
+                    'route' => 'rescue.intern.list.pending',
+                    'icon'  => 'fas fa-list',
+                ],
+                [
                     'text' => 'Adicionar Resgate',
                     'route' => 'rescue.intern.register',
                     'icon'  => 'fas fa-plus-square',

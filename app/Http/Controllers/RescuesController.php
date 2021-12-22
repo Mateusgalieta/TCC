@@ -34,6 +34,55 @@ class RescuesController extends Controller
     }
 
     /**
+     * Show the Rescue Pending list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function rescuesPending()
+    {
+        $rescues_list = Rescue::where('organization_id', auth()->user()->organization_id)
+            ->where('status', 'AGUARDANDO')
+            ->paginate();
+
+        return view('rescue.pending', [
+            'rescues_list' => $rescues_list ?? [],
+        ]);
+    }
+
+    /**
+     * Show the Rescue Pending list
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function confirm($rescue_id)
+    {
+        $rescue = Rescue::findOrFail($rescue_id);
+
+        if ($rescue) {
+            $address = $rescue->address->first();
+
+            $animal = Animal::create([
+                'name' => $rescue->animal_name,
+                'rescuer_name' => $rescue->reporter,
+                'organization_id' => $rescue->organization_id,
+                'address_id'  =>  $address->id
+            ]);
+
+            $rescue->update([
+                'status' => 'FINALIZADO'
+            ]);
+
+            activity()->log('O Resgate ID ' . $rescue->id . ' foi confirmado.');
+
+            session()->flash('alert-success', 'Confirmado com sucesso!');
+            return redirect()->route('rescue.intern.list');
+        }
+
+        session()->flash('alert-danger', 'Ocorreu um erro!');
+        return redirect()->back();
+    }
+
+    /**
      * Redirect to Register Rescue page
      *
      * @return \Illuminate\Contracts\Support\Renderable

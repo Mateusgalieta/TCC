@@ -80,6 +80,8 @@ Route::middleware('auth')->group(function () {
 
     //Rescue Routes
     Route::get('/rescue', [App\Http\Controllers\RescuesController::class, 'index'])->name('rescue.intern.list');
+    Route::get('/rescue/pending', [App\Http\Controllers\RescuesController::class, 'rescuesPending'])->name('rescue.intern.list.pending');
+    Route::get('/rescue/{id}/confirm', [App\Http\Controllers\RescuesController::class, 'confirm'])->name('rescue.intern.confirm');
     Route::get('/rescue/register', [App\Http\Controllers\RescuesController::class, 'register'])->name('rescue.intern.register');
     Route::post('/rescue/create', [App\Http\Controllers\RescuesController::class, 'create'])->name('rescue.intern.create');
     Route::get('/rescue/{id}/edit', [App\Http\Controllers\RescuesController::class, 'edit'])->name('rescue.intern.edit');
