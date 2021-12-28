@@ -59,7 +59,7 @@ class RescuesController extends Controller
         $rescue = Rescue::findOrFail($rescue_id);
 
         if ($rescue) {
-            $address = $rescue->address->first();
+            $address = $rescue->address->first() ?? null;
 
             $animal = Animal::create([
                 'name' => $rescue->animal_name,

@@ -29,6 +29,7 @@
               <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>
+                    <th>Status</th>
                     <th>Nome do Denunciador</th>
                     <th>Nome do animal</th>
                     <th>Cidade</th>
@@ -38,6 +39,7 @@
                 @foreach ($rescues_list ?? [] as $rescue)
                     <tbody>
                         <tr>
+                            <td class="table-warning" style="color: #FFF;">{{ $rescue->status ?? '' }}</td>
                             <td>{{ $rescue->reporter ?? '' }}</td>
                             <td>{{ $rescue->animal_name ?? '' }}</td>
                             <td>{{ $rescue->address ? $rescue->address->city : '' }}</td>
