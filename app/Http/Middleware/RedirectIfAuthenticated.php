@@ -23,7 +23,8 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
 
-        $mailUser = $request->request->all()->email ?? null;
+        $mailUser = $request->request->all();
+        $mailUser = $mailUser['email'] ?? null;
         $user = User::where('email', $mailUser)->first();
 
         dd($mailUser, $user);
