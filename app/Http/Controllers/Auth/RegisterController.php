@@ -73,6 +73,6 @@ class RegisterController extends Controller
         ]);
 
         session()->flash('alert-danger', 'Registro solicitado, aguarde o administrador aprovar');
-        return redirect()->route('login');
+        return redirect()->back();
     }
 }
