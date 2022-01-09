@@ -41,6 +41,11 @@
                             <td>{{ $user->email ?? '' }}</td>
                             <td>{{ $user->department ? $user->department->name : '-' }}</td>
                             <td class="project-actions text-right">
+                                <a class="btn btn-success btn-sm" href="{{ route('user.intern.confirm', $user->id) }}">
+                                    <i class="fas fa-check-circle">
+                                    </i>
+                                    Confirmar Usuário
+                                </a>
                                 <a class="btn btn-info btn-sm" href="{{ route('user.edit', $user->id) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>

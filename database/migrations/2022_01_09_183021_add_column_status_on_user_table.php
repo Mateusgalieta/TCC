@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnStatusOnRescueTable extends Migration
+class AddColumnStatusOnUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddColumnStatusOnRescueTable extends Migration
      */
     public function up()
     {
-        Schema::table('rescues', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->string('status')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddColumnStatusOnRescueTable extends Migration
      */
     public function down()
     {
-        Schema::table('rescues', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('status');
         });
     }

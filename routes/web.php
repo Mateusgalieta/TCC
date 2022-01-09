@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 
     //Users Routes
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('user.index');
+    Route::get('/users/waitingConfirm', [App\Http\Controllers\UsersController::class, 'waitingConfirm'])->name('user.waitingConfirm');
+    Route::get('/users/{id}/confirm', [App\Http\Controllers\UsersController::class, 'confirm'])->name('user.intern.confirm');
     Route::get('/users/register', [App\Http\Controllers\UsersController::class, 'register'])->name('user.register');
     Route::post('/users/create', [App\Http\Controllers\UsersController::class, 'create'])->name('user.create');
     Route::get('/users/{id}/edit', [App\Http\Controllers\UsersController::class, 'edit'])->name('user.edit');

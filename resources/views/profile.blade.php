@@ -25,7 +25,7 @@
         <section class="content">
         <div class="container-fluid">
             <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-5">
 
                 <!-- Profile Image -->
                 <div class="card card-primary card-outline">
@@ -45,6 +45,12 @@
                         </li>
                     </ul>
 
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <b>Token da API</b> <a class="float-right">{{ auth()->user()->organization->tokens->first()->token }}</a>
+                        </li>
+                    </ul>
+
                 </div>
                 <!-- /.card-body -->
                 </div>
@@ -53,7 +59,7 @@
 
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-7">
                 <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">

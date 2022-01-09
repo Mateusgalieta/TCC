@@ -30,13 +30,57 @@ class UsersController extends Controller
         $organization_id = auth()->user()->organization_id;
 
         if(isset($data['search']))
-            $users_list = User::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->where('id', '!=', auth()->user()->id)->paginate();
+            $users_list = User::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->where('id', '!=', auth()->user()->id)->where('status', 'CONFIRMADO')->paginate();
         else
-            $users_list = User::where('id', '!=', auth()->user()->id)->where('organization_id', $organization_id)->paginate();
+            $users_list = User::where('id', '!=', auth()->user()->id)->where('organization_id', $organization_id)->where('status', 'CONFIRMADO')->paginate();
 
         return view('user.index', [
             'users_list' => $users_list ?? [],
         ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function waitingConfirm(Request $request)
+    {
+        $data = $request->all();
+        $organization_id = auth()->user()->organization_id;
+
+        if(isset($data['search']))
+            $users_list = User::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->where('id', '!=', auth()->user()->id)->where('status', 'AGUARDANDO')->paginate();
+        else
+            $users_list = User::where('id', '!=', auth()->user()->id)->where('organization_id', $organization_id)->where('status', 'AGUARDANDO')->paginate();
+
+        return view('user.index-waitingConfirm', [
+            'users_list' => $users_list ?? [],
+        ]);
+    }
+
+    /**
+     * Confirm User
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function confirm($user_id)
+    {
+        $user = User::findOrFail($user_id);
+
+        if ($user) {
+            $user->update([
+                'status' => 'CONFIRMADO'
+            ]);
+
+            activity()->log('O usuário ' . $user->name . ' foi confirmado.');
+
+            session()->flash('alert-success', 'Confirmado com sucesso!');
+            return redirect()->back();
+        }
+
+        session()->flash('alert-danger', 'Ocorreu um erro!');
+        return redirect()->back();
     }
 
     /**
@@ -61,6 +105,7 @@ class UsersController extends Controller
     {
         $data = $request->all();
         $data['organization_id'] = auth()->user()->organization_id;
+        $data['status'] = 'CONFIRMADO';
         $user = User::create($data);
 
         activity()->log('O User ID'. $user->id . ' foi criado.');

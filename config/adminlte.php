@@ -315,6 +315,11 @@ return [
                     'icon'  => 'fas fa-list',
                 ],
                 [
+                    'text' => 'Aguardando Confirmação',
+                    'route' => 'user.waitingConfirm',
+                    'icon'  => 'fas fa-list',
+                ],
+                [
                     'text' => 'Adicionar Usuário',
                     'route' => 'user.register',
                     'icon'  => 'fas fa-user-plus',
