@@ -63,12 +63,12 @@
                             {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Senha', 'required' => true]); !!}
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label">Data de Nascimento</label>
                         <div class="col-sm-10">
                             {!! Form::date('birthday_date', '', ['class' => 'form-control', 'required' => true]) !!}
                         </div>
-                    </div>
+                    </div> --}}
             </div>
             <!-- /.card-body -->
           </div>
