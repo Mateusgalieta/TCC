@@ -21,17 +21,18 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        dd($guards, $request, $next,  auth()->user());
+        $mailUser = $request->parameters->email ?? null;
+        $user = User::where('email', $mailUser)->first();
+
+        dd($user);
+
+        if ($user && $user->status !== 'CONFIRMADO') {
+            return redirect()->back();
+        }
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                dd(auth()->user());
-                if(auth()->user()->status == 'CONFIRMADO') {
-                    return redirect(RouteServiceProvider::HOME);
-                }
-                else {
-                    return Auth::logout();
-                }
+                return redirect(RouteServiceProvider::HOME);
             }
         }
 
