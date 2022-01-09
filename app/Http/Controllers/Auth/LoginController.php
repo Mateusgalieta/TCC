@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        if(auth()->user()->status == 'CONFIRMADO') {
+        if(auth()->user()->status && auth()->user()->status == 'CONFIRMADO') {
             $this->middleware('guest')->except('logout');
         }
         else{
