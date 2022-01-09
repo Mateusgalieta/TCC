@@ -22,10 +22,11 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        $mailUser = $request['parameters']['email'] ?? null;
+
+        $mailUser = $request->request->all()->email ?? null;
         $user = User::where('email', $mailUser)->first();
 
-        dd($user, $request->request->all());
+        dd($mailUser, $user);
 
         if ($user && $user->status !== 'CONFIRMADO') {
             return redirect()->back();
