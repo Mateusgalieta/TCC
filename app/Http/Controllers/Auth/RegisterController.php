@@ -72,6 +72,6 @@ class RegisterController extends Controller
             'status'          => 'AGUARDANDO'
         ]);
 
-        return redirect()->back();
+        return redirect()->route('login');
     }
 }
