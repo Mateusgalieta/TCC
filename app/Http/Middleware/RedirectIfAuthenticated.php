@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
         $mailUser = $request->parameters->email ?? null;
         $user = User::where('email', $mailUser)->first();
 
-        dd($user);
+        dd($user, $mailUser);
 
         if ($user && $user->status !== 'CONFIRMADO') {
             return redirect()->back();
