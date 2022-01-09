@@ -47,7 +47,7 @@
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>Token da API</b> <a class="float-right">{{ auth()->user()->organization->tokens->first()->token }}</a>
+                            <b>Token da API</b> <a class="float-right">{{ auth()->user()->organization->tokens->first()->token ?? '' }}</a>
                         </li>
                     </ul>
 
