@@ -40,7 +40,7 @@
                         </div>
                         <select required name="department_id" class="custom-select" id="type">
                             @foreach ($department_list ?? [] as $department)
-                                <option {{ $department->id == $user->department->id ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
+                                <option {{ $user->department && $department->id == $user->department->id ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
                             @endforeach
                         </select>
                     </div>
