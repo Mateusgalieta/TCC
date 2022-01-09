@@ -191,6 +191,7 @@ class UsersController extends Controller
         if($data){
             if($data['password'] === 'password_confirmation'){
                 $data['password'] = bcrypt($data['password']);
+                $data['status'] = 'AGUARDANDO';
                 $user = User::create($data);
 
                 activity()->log('Usuário ID'. $user->id . ' foi criado.');
