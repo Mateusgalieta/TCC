@@ -72,7 +72,6 @@ class RegisterController extends Controller
             'status'          => 'AGUARDANDO'
         ]);
 
-        session()->flash('alert-danger', 'Registro solicitado, aguarde o administrador aprovar');
         return redirect()->back();
     }
 }
