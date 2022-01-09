@@ -21,6 +21,8 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
+        dd($guards, auth()->user());
+
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 dd(auth()->user());
