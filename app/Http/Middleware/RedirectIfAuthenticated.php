@@ -27,7 +27,7 @@ class RedirectIfAuthenticated
                     return redirect(RouteServiceProvider::HOME);
                 }
                 else {
-                    return route('login');
+                    return Auth::logout();
                 }
             }
         }

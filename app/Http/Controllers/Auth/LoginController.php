@@ -34,14 +34,8 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($request)
     {
-        dd(auth()->user());
-        if(auth()->user() && auth()->user()->status == 'CONFIRMADO') {
-            $this->middleware('guest')->except('logout');
-        }
-        else{
-            Auth::Logout();
-        }
+        $this->middleware('guest')->except('logout');
     }
 }
