@@ -18,7 +18,7 @@ use App\Http\Controllers\ProfilesController;
 
 Route::get('/backoffice', function () {
     return view('auth.login');
-})-name('login');
+})->name('login');
 
 //Laravel UI package Routes
 Auth::routes();
