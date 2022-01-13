@@ -41,6 +41,19 @@
                             <td>{{ $animal->name ?? '' }}</td>
                             <td>{{ $animal->category->name ?? '' }}</td>
                             <td class="project-actions text-right">
+                                @if($animal->transfers()->where('status', 'AGUARDANDO')->get()->count() == 0)
+                                    <a class="btn btn-success btn-sm" href="{{ route('animal.transfer', $animal->id) }}">
+                                        <i class="fas fa-exchange-alt">
+                                        </i>
+                                        Transferir animal
+                                    </a>
+                                @else
+                                    <a class="btn btn-success btn-sm" href="#">
+                                        <i class="fas fa-exchange-alt">
+                                        </i>
+                                        Transferência Solicitada
+                                    </a>
+                                @endif
                                 <a class="btn btn-info btn-sm" href="{{ route('animal.edit', $animal->id) }}">
                                     <i class="fas fa-pencil-alt">
                                     </i>

@@ -6,6 +6,7 @@ use AddressOrigin;
 use App\Models\User;
 use App\Models\Animal;
 use App\Models\Category;
+use App\Models\Transfer;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,69 @@ class AnimalsController extends Controller
         return view('animal.register', [
             'category_list' => Category::where('organization_id', $organization_id)->get(),
         ]);
+    }
+
+    /**
+     * Redirect to Transfer Animal page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function transfers()
+    {
+        $organization_id = auth()->user()->organization_id;
+        $transfers_list = Transfer::where('toOrganization', $organization_id)
+            ->where('status', 'APROVADO')
+            ->paginate();
+
+        return view('animal.transfers', [
+            'transfers_list' => $transfers_list,
+        ]);
+    }
+
+    /**
+     * Redirect to Transfer Animal page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function transferPage($animal_id)
+    {
+        $organization_id = auth()->user()->organization_id;
+        $animal = Animal::findOrFail($animal_id);
+        $organization_list = Organization::where('id', '!=', $organization_id)->get();
+
+        return view('animal.transfer', [
+            'animal' => $animal,
+            'organization_list' => $organization_list
+        ]);
+    }
+
+    /**
+     * Create new Animal Transfer on the System
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function transferCreate(Request $request, $animal_id)
+    {
+        $organization_id = auth()->user()->organization_id;
+        $data = $request->all();
+        $animal = Animal::findOrFail($animal_id);
+
+        if($animal){
+            $transfer = Transfer::create([
+                'fromOrganization' => $organization_id,
+                'toOrganization' => $data['toOrganization'],
+                'animal_id' => $animal_id,
+                'status'   =>  'AGUARDANDO'
+            ]);
+
+            activity()->log('Solicitação de transferência de animal');
+
+            session()->flash('alert-success', 'Criado com sucesso!');
+            return redirect()->back();
+        }
+
+        session()->flash('alert-danger', 'Ocorreu um erro');
+        return redirect()->back();
     }
 
     /**

@@ -74,8 +74,11 @@ Route::middleware('auth')->group(function () {
 
     //Animals Routes
     Route::get('/animals', [App\Http\Controllers\AnimalsController::class, 'index'])->name('animal.index');
+    Route::get('/animals/transfers/', [App\Http\Controllers\AnimalsController::class, 'transfers'])->name('animal.transfers');
     Route::get('/animals/register', [App\Http\Controllers\AnimalsController::class, 'register'])->name('animal.register');
+    Route::get('/animals/{id}/transfer', [App\Http\Controllers\AnimalsController::class, 'transferPage'])->name('animal.transfer');
     Route::post('/animals/create', [App\Http\Controllers\AnimalsController::class, 'create'])->name('animal.create');
+    Route::post('/animals/{id}/transferCreate', [App\Http\Controllers\AnimalsController::class, 'transferCreate'])->name('animal.transferCreate');
     Route::get('/animals/{id}/edit', [App\Http\Controllers\AnimalsController::class, 'edit'])->name('animal.edit');
     Route::put('/animals/{id}/update', [App\Http\Controllers\AnimalsController::class, 'update'])->name('animal.update');
     Route::get('/animals/{id}/delete', [App\Http\Controllers\AnimalsController::class, 'destroy'])->name('animal.destroy');

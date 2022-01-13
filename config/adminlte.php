@@ -255,6 +255,11 @@ return [
             'icon'        => 'fas fa-paw',
             'submenu'     => [
                 [
+                    'text' => 'Transferencias Pendentes',
+                    'route' => 'animal.transfers',
+                    'icon'  => 'fas fa-list',
+                ],
+                [
                     'text' => 'Listar Animais',
                     'route' => 'animal.index',
                     'icon'  => 'fas fa-list',

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Category;
+use App\Models\Transfer;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -68,5 +69,10 @@ class Animal extends Model
     public function rescueAddress()
     {
         return $this->belongsTo(Address::class, 'address_id');
+    }
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
     }
 }
