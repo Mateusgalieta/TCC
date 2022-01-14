@@ -39,7 +39,7 @@
                     <tbody>
                         <tr>
                             <td>{{ $transfer->animal->code ?? '' }}</td>
-                            <td>{{ $transfer->fromOrganization->name ?? '' }}</td>
+                            <td>{{ $transfer->fromOfOrganization->name ?? '' }}</td>
                             <td>{{ $transfer->animal->name ?? '' }}</td>
                             <td>{{ $transfer->animal->category->name ?? '' }}</td>
                             <td class="project-actions text-right">

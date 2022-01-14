@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rescue;
+use App\Models\Transfer;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,18 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        $organization_id = auth()->user()->organization_id;
+        $rescues_list = Rescue::where('organization_id', auth()->user()->organization_id)
+            ->where('status', 'AGUARDANDO')
+            ->paginate();
+
+        $transfers_list = Transfer::where('toOrganization', $organization_id)
+            ->where('status', 'AGUARDANDO')
+            ->paginate();
+
+        return view('home', [
+            'rescues_list' => $rescues_list,
+            'transfers_list' => $transfers_list
+        ]);
     }
 }

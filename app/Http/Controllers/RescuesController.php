@@ -26,7 +26,9 @@ class RescuesController extends Controller
      */
     public function index()
     {
-        $rescues_list = Rescue::where('organization_id', auth()->user()->organization_id)->paginate();
+        $rescues_list = Rescue::where('organization_id', auth()->user()->organization_id)
+            ->where('status', 'FINALIZADO')
+            ->paginate();
 
         return view('rescue.index', [
             'rescues_list' => $rescues_list ?? [],
@@ -69,7 +71,8 @@ class RescuesController extends Controller
             ]);
 
             $rescue->update([
-                'status' => 'FINALIZADO'
+                'status' => 'FINALIZADO',
+                'animal_id' => $animal->id
             ]);
 
             activity()->log('O Resgate ID ' . $rescue->id . ' foi confirmado.');

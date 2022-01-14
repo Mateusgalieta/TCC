@@ -63,7 +63,7 @@
                         </div>
                         <div class="from-group">
                             <label for="observations"></label>
-                            {!! Form::textarea('observations', '', ['class' => 'form-control', 'placeholder' => 'Observações Adicionais', 'required' => false]); !!}
+                            {!! Form::textarea('observations', $rescue->observations, ['class' => 'form-control', 'placeholder' => 'Observações Adicionais', 'required' => false]); !!}
                         </div>
                 </div>
                 <!-- /.card-body -->

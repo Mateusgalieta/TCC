@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Rescue;
 use App\Models\Address;
 use App\Models\Category;
 use App\Models\Transfer;
@@ -74,5 +75,10 @@ class Animal extends Model
     public function transfers()
     {
         return $this->hasMany(Transfer::class);
+    }
+
+    public function rescue()
+    {
+        return $this->hasMany(Rescue::class);
     }
 }

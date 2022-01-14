@@ -235,6 +235,11 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text' => 'Home',
+            'route'  => 'home',
+            'icon' => 'fas fa-home',
+        ],
+        [
             'text'        => 'Categoria',
             'icon'        => 'fas fa-building',
             'submenu'     => [
@@ -257,7 +262,7 @@ return [
                 [
                     'text' => 'Transferencias Pendentes',
                     'route' => 'animal.transfers',
-                    'icon'  => 'fas fa-list',
+                    'icon'  => 'fas fa-exchange-alt',
                 ],
                 [
                     'text' => 'Listar Animais',
@@ -276,13 +281,13 @@ return [
             'icon'        => 'fas fa-first-aid',
             'submenu'     => [
                 [
-                    'text' => 'Listar Resgates',
-                    'route' => 'rescue.intern.list',
-                    'icon'  => 'fas fa-list',
-                ],
-                [
                     'text' => 'Resgates Pendentes',
                     'route' => 'rescue.intern.list.pending',
+                    'icon'  => 'fas fa-exclamation-circle',
+                ],
+                [
+                    'text' => 'Listar Resgates',
+                    'route' => 'rescue.intern.list',
                     'icon'  => 'fas fa-list',
                 ],
                 [

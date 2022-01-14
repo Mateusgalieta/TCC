@@ -48,7 +48,7 @@ class Transfer extends Model
 
     /*  Table Relationships  */
 
-    public function fromOrganization()
+    public function fromOfOrganization()
     {
         return $this->belongsTo(Organization::class, 'fromOrganization');
     }

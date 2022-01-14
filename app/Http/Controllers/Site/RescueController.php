@@ -60,15 +60,16 @@ class RescueController extends Controller
                 'animal_name' => $data['name'],
                 'organization_id' => $data['organization_id'],
                 'address_id' => $address->id,
-                'status' => 'AGUARDANDO'
+                'status' => 'AGUARDANDO',
+                'observations' => $data['observations']
             ]);
 
             activity()->log('Resgate ID'. $rescue->id . ' foi criado.');
 
-            return redirect()->back()->with('success', 'Resgate Criado com sucesso!');
+            return redirect()->route('site.rescue.index')->with('success', 'Resgate Criado com sucesso!');
         }
 
-        return redirect()->back()->with('error', 'Ocorreu um erro');
+        return redirect()->route('site.rescue.index')->with('error', 'Ocorreu um erro');
     }
 
 }

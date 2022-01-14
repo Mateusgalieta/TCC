@@ -48,7 +48,7 @@
                             </div>
                             <select name="category_id" class="custom-select" id="type">
                                 @foreach ($category_list ?? [] as $category)
-                                    <option {{ $category->id == $animal->category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option {{ $animal->category && $category->id == $animal->category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>

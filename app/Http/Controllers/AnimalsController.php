@@ -35,7 +35,7 @@ class AnimalsController extends Controller
         if(isset($data['search']))
             $animal_list = Animal::where('organization_id', $organization_id)->where('name', 'like', '%'. $data['search']. '%')->paginate();
         else
-            $animal_list = Animal::paginate();
+            $animal_list = Animal::where('organization_id', $organization_id)->paginate();
 
         return view('animal.index', [
             'animal_list' => $animal_list ?? [],
@@ -65,7 +65,7 @@ class AnimalsController extends Controller
     {
         $organization_id = auth()->user()->organization_id;
         $transfers_list = Transfer::where('toOrganization', $organization_id)
-            ->where('status', 'APROVADO')
+            ->where('status', 'AGUARDANDO')
             ->paginate();
 
         return view('animal.transfers', [
@@ -112,11 +112,63 @@ class AnimalsController extends Controller
             activity()->log('Solicitação de transferência de animal');
 
             session()->flash('alert-success', 'Criado com sucesso!');
-            return redirect()->back();
+            return redirect()->route('animal.index');
         }
 
         session()->flash('alert-danger', 'Ocorreu um erro');
-        return redirect()->back();
+        return redirect()->route('animal.index');
+    }
+
+    /**
+     * Method to transfer animal into two organization
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function approveTransfer(Request $request, $transfer_id)
+    {
+        $organization_id = auth()->user()->organization_id;
+        $data = $request->all();
+        $transfer = Transfer::findOrFail($transfer_id);
+
+        if($transfer){
+            $transfer->update([
+                'status' => 'APROVADO',
+            ]);
+
+            $categoryName = $transfer->animal->category->name;
+            $verifyCategory = Category::where('organization_id', $organization_id)
+                ->where('name', $categoryName)
+                ->first();
+
+            if(!$verifyCategory) {
+                $category = Category::create([
+                    'name' => $categoryName,
+                    'organization_id' => $organization_id
+                ]);
+            }
+            else {
+                $category = $transfer->animal->category;
+            }
+
+            if($transfer->animal->rescue) {
+                $transfer->animal->rescue->update([
+                    'organization_id' => $organization_id
+                ]);
+            }
+
+            $transfer->animal->update([
+                'organization_id' => $organization_id,
+                'category_id' => $category->id
+            ]);
+
+            activity()->log('Solicitação de transferência aprovada');
+
+            session()->flash('alert-success', 'Aprovado com sucesso!');
+            return redirect()->route('animal.transfers');
+        }
+
+        session()->flash('alert-danger', 'Ocorreu um erro');
+        return redirect()->route('animal.transfers');
     }
 
     /**
@@ -179,7 +231,7 @@ class AnimalsController extends Controller
         activity()->log('Animal ID'. $animal->id . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
-        return redirect()->route('organization.index');
+        return redirect()->route('animal.index');
     }
 
     /**
