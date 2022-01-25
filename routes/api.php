@@ -31,6 +31,14 @@ Route::name('category.')->group(function () {
     Route::delete('/categories/{id}/delete', ['as' => 'destroy', 'uses' => 'API\CategoriesController@destroy']);
 });
 
+//Rescues Routes
+Route::name('rescue.')->group(function () {
+    Route::get('/rescues/{id}', ['as' => 'getRescues', 'uses' => 'API\RescuesController@getRescues']);
+    Route::post('/rescues/create', ['as' => 'create', 'uses' => 'API\RescuesController@create']);
+    Route::put('/rescues/{id}/update', ['as' => 'update', 'uses' => 'API\RescuesController@update']);
+    Route::delete('/rescues/{id}/delete', ['as' => 'destroy', 'uses' => 'API\RescuesController@destroy']);
+});
+
 //Departments Routes
 Route::name('department.')->group(function () {
     Route::get('/departments/{id}', ['as' => 'getDepartments', 'uses' => 'API\DepartmentsController@getDepartments']);

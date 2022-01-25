@@ -108,7 +108,7 @@ class CategoriesController extends Controller
      */
     public function destroy($category_id)
     {
-        $category = User::findOrFail($category_id);
+        $category = Category::findOrFail($category_id);
 
         if ($category){
             $category->delete();
