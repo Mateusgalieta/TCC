@@ -71,12 +71,25 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    <style>
+        .overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+
 </head>
 
-<body class="@yield('classes_body')" @yield('body_data')>
+<body class="@yield('classes_body')" @yield('body_data') style="background-image: url('/img/dog.jpg'); background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: center center; position: relative;">
+    <div class="overlay">
+    </div>
 
-    {{-- Body Content --}}
-    @yield('body')
+
+        {{-- Body Content --}}
+        @yield('body')
+
 
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))

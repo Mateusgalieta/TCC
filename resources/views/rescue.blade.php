@@ -21,12 +21,28 @@
                 background-size: cover;
                 background-attachment: fixed;
                 background-position: center center;
+                position: relative;
+            }
+
+            .background label {
+                color: #FFF;
+            }
+
+            .overlay {
+                background: rgba(0, 0, 0, 0.6);
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
             }
         </style>
     </head>
 
     <body class="background">
-        <div class="container h-100" style="margin-top: 80px;">
+
+        <div class="overlay"></div>
+        <div class="container h-100" style="padding-top: 80px; position: relative;">
             @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block" id="alert1">
                     <button type="button" class="close" data-dismiss="alert1">×</button>
@@ -56,7 +72,7 @@
                                 <div class="form-group col-12 mt-4">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <label class="input-group-text" for="type">ONG responsável</label>
+                                            <label class="input-group-text" for="type" style="color: rgba(0,0,0,1)">ONG responsável</label>
                                         </div>
                                         <select required name="organization_id" class="form-control">
                                             @foreach ($organizations ?? [] as $organization)
