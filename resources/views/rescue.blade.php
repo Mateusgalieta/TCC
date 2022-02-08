@@ -39,7 +39,7 @@
 
             .button-backoffice {
                 float: right;
-                width: 150px;
+                width: 130px;
                 background-color: #22D59E;
                 color: #FFF;
                 border-radius: 5px;
@@ -47,7 +47,7 @@
                 text-align: center;
                 text-decoration: none;
                 font-weight: bold;
-                padding: 15px 20px;
+                padding: 15px 15px;
             }
 
             .button-backoffice:hover {
