@@ -36,13 +36,38 @@
                 top: 0;
                 left: 0;
             }
+
+            .button-backoffice {
+                float: right;
+                width: 150px;
+                background-color: #22D59E;
+                color: #FFF;
+                border-radius: 5px;
+                text-align: center;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 15px 20px;
+            }
+
+            .button-backoffice:hover {
+                transform: scale(1.05);
+                transition: all 0.2s ease-in;
+                transition-delay: 0.02s;
+                filter: brightness(110%);
+                -webkit-transform: scale(1.05);
+                color: #FFF;
+                box-shadow: 0 0 50px rgba(255,255,255,.3);
+            }
         </style>
     </head>
 
     <body class="background">
 
         <div class="overlay"></div>
-        <div class="container h-100" style="padding-top: 80px; position: relative;">
+
+
+        <div class="container h-100" style="padding-top: 40px; position: relative;">
+
             @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-block" id="alert1">
                     <button type="button" class="close" data-dismiss="alert1">×</button>
@@ -59,7 +84,13 @@
 
             {!!  Form::open(['route' => ['site.rescue.create'], 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'registerForm', 'enctype' => 'multipart/form-data']) !!}
                 <div class="row h-100 justify-content-center align-items-center">
+                    <div class="col-12">
+                        <a class="button-backoffice" href="{{ route('login') }}">BACKOFFICE</a>
+                    </div>
+
                     <h1 style="text-align: center; color: #FFF">Solicitação de Resgate de Animais</h1>
+
+
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-6">
