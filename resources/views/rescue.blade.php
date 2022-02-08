@@ -43,6 +43,7 @@
                 background-color: #22D59E;
                 color: #FFF;
                 border-radius: 5px;
+                font-size: 14px;
                 text-align: center;
                 text-decoration: none;
                 font-weight: bold;
@@ -85,7 +86,7 @@
             {!!  Form::open(['route' => ['site.rescue.create'], 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'registerForm', 'enctype' => 'multipart/form-data']) !!}
                 <div class="row h-100 justify-content-center align-items-center">
                     <div class="col-12">
-                        <a class="button-backoffice" href="{{ route('login') }}">BACKOFFICE</a>
+                        <a class="button-backoffice" href="{{ route('login') }}">LOGIN</a>
                     </div>
 
                     <h1 style="text-align: center; color: #FFF">Solicitação de Resgate de Animais</h1>
