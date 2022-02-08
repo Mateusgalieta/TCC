@@ -59,7 +59,7 @@
 
             {!!  Form::open(['route' => ['site.rescue.create'], 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'registerForm', 'enctype' => 'multipart/form-data']) !!}
                 <div class="row h-100 justify-content-center align-items-center">
-                    <h1 style="text-align: center; color: #FFF">Denuncia de Resgate de Animais</h1>
+                    <h1 style="text-align: center; color: #FFF">Solicitação de Resgate de Animais</h1>
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-6">
