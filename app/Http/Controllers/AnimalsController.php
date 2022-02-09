@@ -10,6 +10,8 @@ use App\Models\Transfer;
 use Barryvdh\DomPDF\PDF;
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use App\Exports\AnimalsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AnimalsController extends Controller
 {
@@ -266,6 +268,16 @@ class AnimalsController extends Controller
         $pdf = \PDF::loadView('template.animals', compact('organization', 'animal_list'));
         // download PDF file with download method
         return $pdf->download('animais-exportados.pdf');
+    }
+
+    /**
+     * Export Excel of animals
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function excelExport()
+    {
+        return Excel::download(new AnimalsExport, 'animais-exportados.xlsx');
     }
 }
 

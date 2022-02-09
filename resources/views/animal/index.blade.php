@@ -12,20 +12,28 @@
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 250px;">
 
-                  <input type="text" name="search" class="form-control float-right" placeholder="Pesquisar">
+                    <input type="text" name="search" class="form-control float-right" placeholder="Pesquisar">
 
-                  <div class="input-group-append" style="margin-right: 10px;">
-                    <button type="submit" id="search" class="btn btn-default">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                  <a class="btn btn-danger btn-sm" href="{{  route('animal.pdfExport')  }}">
-                    <i class="fa-solid fa-file-pdf"></i>
+                    <div class="input-group-append" style="margin-right: 10px;">
+                        <button type="submit" id="search" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+              </div>
+              <div style="float:right">
+                <a class="btn btn-danger btn-sm" style="margin-right: 10px;" href="{{  route('animal.pdfExport')  }}">
+                    <i class="fas fa-file-pdf"></i>
                     </i>
                     Exp. PDF
                 </a>
-                </div>
-              </div>
+                <a class="btn btn-success btn-sm" href="{{  route('animal.excelExport')  }}" style="margin-right: 10px;">
+                    <i class="fas fa-file-excel"></i>
+                    </i>
+                    Exp. Excel
+                </a></div>
             </div>
             {!! Form::close() !!}
 
