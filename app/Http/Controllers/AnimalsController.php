@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Animal;
 use App\Models\Category;
 use App\Models\Transfer;
+use Barryvdh\DomPDF\PDF;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 
@@ -250,5 +251,21 @@ class AnimalsController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Export PDF of animals
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function pdfExport()
+    {
+        $organization_id = auth()->user()->organization_id;
+        $organization = Organization::find($organization_id);
+        $animal_list = Animal::where('organization_id', $organization_id)->get();
+        $animal_list = collect($animal_list);
+
+        $pdf = \PDF::loadView('template.animals', compact('organization', 'animal_list'));
+        // download PDF file with download method
+        return $pdf->download('animais-exportados.pdf');
+    }
 }
 

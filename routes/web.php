@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/animals/{id}/edit', [App\Http\Controllers\AnimalsController::class, 'edit'])->name('animal.edit');
     Route::put('/animals/{id}/update', [App\Http\Controllers\AnimalsController::class, 'update'])->name('animal.update');
     Route::get('/animals/{id}/delete', [App\Http\Controllers\AnimalsController::class, 'destroy'])->name('animal.destroy');
+    Route::get('/animals/PDF/export', [App\Http\Controllers\AnimalsController::class, 'pdfExport'])->name('animal.pdfExport');
 
     //Rescue Routes
     Route::get('/rescue', [App\Http\Controllers\RescuesController::class, 'index'])->name('rescue.intern.list');

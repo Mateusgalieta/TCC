@@ -10,15 +10,20 @@
               <h3 class="card-title">Lista de Animais</h3>
 
               <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
+                <div class="input-group input-group-sm" style="width: 250px;">
 
                   <input type="text" name="search" class="form-control float-right" placeholder="Pesquisar">
 
-                  <div class="input-group-append">
+                  <div class="input-group-append" style="margin-right: 10px;">
                     <button type="submit" id="search" class="btn btn-default">
                       <i class="fas fa-search"></i>
                     </button>
                   </div>
+                  <a class="btn btn-danger btn-sm" href="{{  route('animal.pdfExport')  }}">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    </i>
+                    Exp. PDF
+                </a>
                 </div>
               </div>
             </div>
