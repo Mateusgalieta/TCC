@@ -68,6 +68,7 @@ class AnimalsController extends Controller
     {
         $organization_id = auth()->user()->organization_id;
         $transfers_list = Transfer::where('toOrganization', $organization_id)
+            ->orWhere('fromOrganization', $organization_id)
             ->where('status', 'AGUARDANDO')
             ->paginate();
 
