@@ -189,11 +189,12 @@ class AnimalsController extends Controller
 
         $data = $request->all();
         $organization_id = auth()->user()->organization_id;
+        $data['organization_id'] = $organization_id;
 
         if($data){
             $animal = Animal::create($data);
 
-            activity()->log('Animal ID'. $animal->id . ' foi criado.');
+            activity()->log('Animal '. $animal->name . ' foi criado.');
 
             session()->flash('alert-success', 'Criado com sucesso!');
             return redirect()->route('address.register', [$animal->id]);
