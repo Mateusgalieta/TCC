@@ -32,6 +32,7 @@
                     <th>Status</th>
                     <th>Coleira de identificação</th>
                     <th>Organização de origem</th>
+                    <th>Organização de destino</th>
                     <th>Nome do animal</th>
                     <th>Categoria do animal</th>
                   </tr>
@@ -42,6 +43,7 @@
                             <td>{{ $transfer->status ?? '' }}</td>
                             <td>{{ $transfer->animal->code ?? '' }}</td>
                             <td>{{ $transfer->fromOfOrganization->name ?? '' }}</td>
+                            <td>{{ $transfer->toOrganization->name ?? '' }}</td>
                             <td>{{ $transfer->animal->name ?? '' }}</td>
                             <td>{{ $transfer->animal->category->name ?? '' }}</td>
                             <td class="project-actions text-right">
