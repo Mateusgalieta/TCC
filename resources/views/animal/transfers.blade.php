@@ -29,6 +29,7 @@
               <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>
+                    <th>Status</th>
                     <th>Coleira de identificação</th>
                     <th>Organização de origem</th>
                     <th>Nome do animal</th>
@@ -38,6 +39,7 @@
                 @foreach ($transfers_list ?? [] as $transfer)
                     <tbody>
                         <tr>
+                            <td>{{ $transfer->status ?? '' }}</td>
                             <td>{{ $transfer->animal->code ?? '' }}</td>
                             <td>{{ $transfer->fromOfOrganization->name ?? '' }}</td>
                             <td>{{ $transfer->animal->name ?? '' }}</td>
