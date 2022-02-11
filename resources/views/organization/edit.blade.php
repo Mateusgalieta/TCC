@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Departamento</h1>
+            <h1>Editar Organização</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
