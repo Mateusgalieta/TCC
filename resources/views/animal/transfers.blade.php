@@ -43,7 +43,7 @@
                             <td>{{ $transfer->status ?? '' }}</td>
                             <td>{{ $transfer->animal->code ?? '' }}</td>
                             <td>{{ $transfer->fromOfOrganization->name ?? '' }}</td>
-                            <td>{{ $transfer->toOrganization->name ?? '' }}</td>
+                            <td>{{ $transfer->toOfOrganization->name ?? '' }}</td>
                             <td>{{ $transfer->animal->name ?? '' }}</td>
                             <td>{{ $transfer->animal->category->name ?? '' }}</td>
                             <td class="project-actions text-right">

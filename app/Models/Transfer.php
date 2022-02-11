@@ -53,7 +53,7 @@ class Transfer extends Model
         return $this->belongsTo(Organization::class, 'fromOrganization');
     }
 
-    public function toOrganization()
+    public function toOfOrganization()
     {
         return $this->belongsTo(Organization::class, 'toOrganization');
     }
