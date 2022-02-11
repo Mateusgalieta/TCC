@@ -43,16 +43,18 @@
                             <td>{{ $transfer->animal->name ?? '' }}</td>
                             <td>{{ $transfer->animal->category->name ?? '' }}</td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-success btn-sm" href="{{ route('animal.approveTransfer', $transfer->id) }}">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Aprovar Transferência
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="{{ route('animal.refuseTransfer', $transfer->id) }}">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Recusar Transferência
-                                </a>
+                                @if($transfer->toOrganization == auth()->user()->organization_id)
+                                    <a class="btn btn-success btn-sm" href="{{ route('animal.approveTransfer', $transfer->id) }}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Aprovar Transferência
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" href="{{ route('animal.refuseTransfer', $transfer->id) }}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Recusar Transferência
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     </tbody>
