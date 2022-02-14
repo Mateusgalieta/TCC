@@ -63,7 +63,7 @@ class ProfilesController extends Controller
 
         $user->update($data);
 
-        activity()->log('O profile do user ID'. $user->id . ' foi atualizado.');
+        activity()->log('O profile do usuário '. $user->name . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->back();

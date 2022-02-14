@@ -67,7 +67,7 @@ class OrganizationsController extends Controller
         if($data){
             $organization = Organization::create($data);
 
-            activity()->log('Organização ID'. $organization->id . ' foi criado.');
+            activity()->log('Organização '. $organization->name . ' foi criado.');
 
             $token = $organization->createToken($request->name)->plainTextToken;
 
@@ -105,7 +105,7 @@ class OrganizationsController extends Controller
         $organization = Organization::findOrFail($organization_id);
         $organization->update($data);
 
-        activity()->log('Organização ID'. $organization->id . ' foi atualizado.');
+        activity()->log('Organização '. $organization->name . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->route('organization.index');
@@ -121,7 +121,7 @@ class OrganizationsController extends Controller
         $organization = Organization::findOrFail($organization_id);
         $organization->delete();
 
-        activity()->log('Organização ID'. $organization->id . ' foi deletado.');
+        activity()->log('Organização '. $organization->name . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();

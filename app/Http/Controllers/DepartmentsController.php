@@ -69,7 +69,7 @@ class DepartmentsController extends Controller
                 'status' => 'success',
                 'message' => "Criado com sucesso!",
             ];
-            activity()->log('Departamento ID'. $department->id . ' foi criado.');
+            activity()->log('Departamento '. $department->name . ' foi criado.');
         }
         else {
             $response = [
@@ -107,7 +107,7 @@ class DepartmentsController extends Controller
         $department = Department::findOrFail($department_id);
         $department->update($data);
 
-        activity()->log('Departamento ID'. $department->id . ' foi atualizado.');
+        activity()->log('Departamento '. $department->name . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->route('department.index');
@@ -123,7 +123,7 @@ class DepartmentsController extends Controller
         $department = Department::findOrFail($department_id);
         $department->delete();
 
-        activity()->log('Departamento ID'. $department->id . ' foi deletado.');
+        activity()->log('Departamento '. $department->name . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();

@@ -233,7 +233,7 @@ class AnimalsController extends Controller
         $animal = Animal::findOrFail($animal_id);
         $animal->update($data);
 
-        activity()->log('Animal ID'. $animal->id . ' foi atualizado.');
+        activity()->log('Animal '. $animal->name . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->route('animal.index');
@@ -249,7 +249,7 @@ class AnimalsController extends Controller
         $organization = Animal::findOrFail($organization_id);
         $organization->delete();
 
-        activity()->log('Organização ID'. $organization->id . ' foi deletado.');
+        activity()->log('Animal '. $animal->name . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();

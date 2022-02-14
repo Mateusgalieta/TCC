@@ -75,7 +75,7 @@ class RescuesController extends Controller
                 'animal_id' => $animal->id
             ]);
 
-            activity()->log('O Resgate ID ' . $rescue->id . ' foi confirmado.');
+            activity()->log('O Resgate do animal ' . $rescue->name . ' foi confirmado.');
 
             session()->flash('alert-success', 'Confirmado com sucesso!');
             return redirect()->route('rescue.intern.list');
@@ -135,7 +135,7 @@ class RescuesController extends Controller
                 ]);
             }
 
-            activity()->log('Resgate ID ' . $rescue->id . ' foi criado.');
+            activity()->log('Resgate do animal  ' . $rescue->name . ' foi criado.');
 
             session()->flash('alert-success', 'Criado com sucesso!');
             return redirect()->route('rescue.intern.list');
@@ -189,7 +189,7 @@ class RescuesController extends Controller
             ]);
         }
 
-        activity()->log('Resgate ID ' . $rescue->id  . ' foi atualizado.');
+        activity()->log('Resgate do animal ' . $rescue->name  . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->route('rescue.intern.list');
@@ -205,7 +205,7 @@ class RescuesController extends Controller
         $rescue = Rescue::findOrFail($rescue_id);
         $rescue->delete();
 
-        activity()->log('Resgate ID '. $rescue->id . ' foi deletado.');
+        activity()->log('Resgate do animal '. $rescue->name . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();

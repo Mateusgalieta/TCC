@@ -108,7 +108,7 @@ class UsersController extends Controller
         $data['status'] = 'CONFIRMADO';
         $user = User::create($data);
 
-        activity()->log('O User ID'. $user->id . ' foi criado.');
+        activity()->log('O Usuário '. $user->name . ' foi criado.');
 
         session()->flash('alert-success', 'Criado com sucesso!');
         return redirect()->route('user.index');
@@ -148,7 +148,7 @@ class UsersController extends Controller
 
         $user->update($data);
 
-        activity()->log('O User ID'. $user->id . ' foi atualizado.');
+        activity()->log('O Usuário '. $user->name . ' foi atualizado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->route('user.index');
@@ -164,7 +164,7 @@ class UsersController extends Controller
         $user = User::findOrFail($user_id);
         $user->delete();
 
-        activity()->log('O User ID'. $user->id . ' foi deletado.');
+        activity()->log('O Usuário '. $user->name . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();
@@ -194,8 +194,8 @@ class UsersController extends Controller
                 $data['status'] = 'AGUARDANDO';
                 $user = User::create($data);
 
-                activity()->log('Usuário ID'. $user->id . ' foi criado.');
-                activity()->log('Usuario '. $user->name . ' foi adcionado na organização ' . $organization->name);
+                activity()->log('Usuário '. $user->name . ' foi criado.');
+                activity()->log('Usuário '. $user->name . ' foi adicionado na organização ' . $organization->name);
 
                 session()->flash('alert-success', 'Criado com sucesso!');
                 return redirect()->route('animal.index');

@@ -64,7 +64,7 @@ class RescueController extends Controller
                 'observations' => $data['observations']
             ]);
 
-            activity()->log('Resgate ID'. $rescue->id . ' foi criado.');
+            activity()->log('Resgate do animal '. $rescue->name . ' foi criado.');
 
             return redirect()->route('site.rescue.index')->with('success', 'Resgate Criado com sucesso!');
         }

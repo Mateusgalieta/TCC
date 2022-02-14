@@ -84,7 +84,7 @@ class AddressesController extends Controller
                 'origin' => 2,
             ]);
 
-            activity()->log('Endereço de Resgate ID'. $address->id . ' foi criado.');
+            activity()->log('Endereço de Resgate '. $address->address . ' foi criado.');
 
             $animal = Animal::findOrFail($data['animal_id']);
             $animal->update(['address_id' => $address->id]);
@@ -134,7 +134,7 @@ class AddressesController extends Controller
         $address = Address::findOrFail($address_id);
         $address->update($data);
 
-        activity()->log('Endereço ID'. $address->id . ' foi editado.');
+        activity()->log('Endereço '. $address->address . ' foi editado.');
 
         session()->flash('alert-success', 'Atualizado com sucesso!');
         return redirect()->route('animal.index');
@@ -150,7 +150,7 @@ class AddressesController extends Controller
         $address = Address::findOrFail($address_id);
         $address->delete();
 
-        activity()->log('Endereço ID'. $address->id . ' foi deletado.');
+        activity()->log('Endereço '. $address->address . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();
