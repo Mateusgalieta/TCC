@@ -25,7 +25,9 @@ class ProfilesController extends Controller
      */
     public function index()
     {
-        $personal_logs = ActivityLog::where('causer_id', auth()->user()->id)->paginate();
+        $personal_logs = ActivityLog::where('causer_id', auth()->user()->id)
+            ->orderByDesc('created_at')
+            ->paginate();
 
         return view('profile', [
             'personal_logs' => $personal_logs
