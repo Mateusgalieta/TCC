@@ -25,6 +25,10 @@ class OrganizationsController extends Controller
      */
     public function index(Request $request)
     {
+        if(auth()->user()->administrator != 1) {
+            abort(403);
+        }
+
         $data = $request->all();
 
         if(isset($data['search']))
@@ -44,6 +48,10 @@ class OrganizationsController extends Controller
      */
     public function register()
     {
+        if(auth()->user()->administrator != 1) {
+            abort(403);
+        }
+
         return view('organization.register');
     }
 
@@ -54,6 +62,9 @@ class OrganizationsController extends Controller
      */
     public function create(Request $request)
     {
+        if(auth()->user()->administrator != 1) {
+            abort(403);
+        }
         $data = $request->validate([
             'name' => 'required|string',
             'document' => 'required|string',
@@ -86,6 +97,9 @@ class OrganizationsController extends Controller
      */
     public function edit($organization_id)
     {
+        if(auth()->user()->administrator != 1) {
+            abort(403);
+        }
         $organization = Organization::findOrFail($organization_id);
 
         return view('organization.edit', [
@@ -100,6 +114,9 @@ class OrganizationsController extends Controller
      */
     public function update(Request $request, $organization_id)
     {
+        if(auth()->user()->administrator != 1) {
+            abort(403);
+        }
         $data = $request->all();
 
         $organization = Organization::findOrFail($organization_id);
@@ -118,6 +135,9 @@ class OrganizationsController extends Controller
      */
     public function destroy($organization_id)
     {
+        if(auth()->user()->administrator != 1) {
+            abort(403);
+        }
         $organization = Organization::findOrFail($organization_id);
         $organization->delete();
 

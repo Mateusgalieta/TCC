@@ -1,5 +1,5 @@
 @extends('errors::minimal')
 
-@section('title', __('Forbidden'))
-@section('code', '403')
-@section('message', __($exception->getMessage() ?: 'Forbidden'))
+@section('title', 'Desculpe, não foi possível acessar organizações')
+{{-- @section('code', '403') --}}
+@section('message', 'Apenas administradores possuem acesso em organizações, por favor, contate um administrador.')
