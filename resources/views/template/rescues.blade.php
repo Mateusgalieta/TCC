@@ -43,7 +43,7 @@
         </tr>
         @foreach($rescue_list ?? [] as $rescue)
             <tr>
-                <td class="table-success" style="color: #FFF;">{{ $rescue->status ?? '' }}</td>
+                <td>{{ $rescue->status ?? '' }}</td>
                 <td>{{ $rescue->reporter ?? '' }}</td>
                 <td>{{ $rescue->animal_name ?? '' }}</td>
                 <td>{{ $rescue->address ? $rescue->address->city : '' }}</td>
