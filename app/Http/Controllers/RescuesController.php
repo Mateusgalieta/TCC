@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use App\Models\Rescue;
 use App\Models\Address;
+use Barryvdh\DomPDF\PDF;
+use App\Models\Organization;
 use Illuminate\Http\Request;
+use App\Exports\RescuesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RescuesController extends Controller
 {
@@ -211,5 +215,31 @@ class RescuesController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Export PDF of Rescues
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function pdfExport()
+    {
+        $organization_id = auth()->user()->organization_id;
+        $organization = Organization::find($organization_id);
+        $rescue_list = Rescue::where('organization_id', $organization_id)->get();
+        $rescue_list = collect($rescue_list);
+
+        $pdf = \PDF::loadView('template.rescues', compact('organization', 'rescue_list'));
+        // download PDF file with download method
+        return $pdf->download('resgates-exportados.pdf');
+    }
+
+    /**
+     * Export Excel of Rescues
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function excelExport()
+    {
+        return Excel::download(new RescuesExport, 'resgates-exportados.xlsx');
+    }
 }
 

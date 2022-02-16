@@ -21,6 +21,17 @@
                   </div>
                 </div>
               </div>
+              <div style="float:right">
+                <a class="btn btn-danger btn-sm" style="margin-right: 10px;" href="{{  route('rescue.pdfExport')  }}">
+                    <i class="fas fa-file-pdf"></i>
+                    </i>
+                    Exp. PDF
+                </a>
+                <a class="btn btn-success btn-sm" href="{{  route('rescue.excelExport')  }}" style="margin-right: 10px;">
+                    <i class="fas fa-file-excel"></i>
+                    </i>
+                    Exp. Excel
+                </a></div>
             </div>
             {!! Form::close() !!}
 

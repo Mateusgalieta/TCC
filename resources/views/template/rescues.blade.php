@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exportação de Animais da Organização {{ $organization->name }}</title>
+    <title>Exportação de Resgates da Organização {{ $organization->name }}</title>
 
     <style>
       table {
@@ -35,19 +35,19 @@
 <body>
     <table id="table">
         <tr>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Categoria</th>
-            <th>Resgatado por</th>
-            <th>Data de resgate</th>
+            <th>Status</th>
+            <th>Nome do Denunciador</th>
+            <th>Nome do animal</th>
+            <th>Cidade</th>
+            <th>Estado</th>
         </tr>
-        @foreach($animal_list ?? [] as $animal)
+        @foreach($rescue_list ?? [] as $rescue)
             <tr>
-                <td>{{ $animal->code }}</td>
-                <td>{{ $animal->name }}</td>
-                <td>{{ $animal->category ? $animal->category->name : '' }}</td>
-                <td>{{ $animal->rescuer_name ?? '' }}</td>
-                <td>{{ $animal->created_at->format('d/m/Y H:i') }}</td>
+                <td class="table-success" style="color: #FFF;">{{ $rescue->status ?? '' }}</td>
+                <td>{{ $rescue->reporter ?? '' }}</td>
+                <td>{{ $rescue->animal_name ?? '' }}</td>
+                <td>{{ $rescue->address ? $rescue->address->city : '' }}</td>
+                <td>{{ $rescue->address ? $rescue->address->state : '' }}</td>
             </tr>
         @endforeach
     </table>

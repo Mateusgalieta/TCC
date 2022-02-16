@@ -96,7 +96,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/rescue/{id}/edit', [App\Http\Controllers\RescuesController::class, 'edit'])->name('rescue.intern.edit');
     Route::put('/rescue/{id}/update', [App\Http\Controllers\RescuesController::class, 'update'])->name('rescue.intern.update');
     Route::get('/rescue/{id}/delete', [App\Http\Controllers\RescuesController::class, 'destroy'])->name('rescue.intern.destroy');
-
+    Route::get('/rescues/organization/PDF/export', [App\Http\Controllers\RescuesController::class, 'pdfExport'])->name('rescue.pdfExport');
+    Route::get('/rescues/organization/excel/export', [App\Http\Controllers\RescuesController::class, 'excelExport'])->name('rescue.excelExport');
 });
 
 Route::get('/', [App\Http\Controllers\Site\RescueController::class, 'index'])->name('site.rescue.index');
