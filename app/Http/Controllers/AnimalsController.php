@@ -246,10 +246,10 @@ class AnimalsController extends Controller
      */
     public function destroy($organization_id)
     {
+        activity()->log('Animal '. $animal->name . ' foi deletado.');
+
         $organization = Animal::findOrFail($organization_id);
         $organization->delete();
-
-        activity()->log('Animal '. $animal->name . ' foi deletado.');
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();
