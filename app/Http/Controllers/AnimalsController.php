@@ -154,15 +154,13 @@ class AnimalsController extends Controller
                 $category = $transfer->animal->category;
             }
 
-            $transfer2 = Transfer::findOrFail($transfer_id);
-
-            if($transfer2->animal->rescue) {
-                $transfer2->animal->rescue->update([
+            if($transfer->animal->rescue->first()) {
+                $transfer->animal->rescue->first()->update([
                     'organization_id' => $organization_id
                 ]);
             }
 
-            $transfer2->animal->update([
+            $transfer->animal->update([
                 'organization_id' => $organization_id,
                 'category_id' => $category->id
             ]);
