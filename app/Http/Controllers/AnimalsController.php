@@ -244,13 +244,13 @@ class AnimalsController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function destroy($organization_id)
+    public function destroy($animal_id)
     {
-        $organization = Animal::findOrFail($organization_id);
+        $animal = Animal::findOrFail($animal_id);
 
         activity()->log('Animal '. $animal->name . ' foi deletado.');
 
-        $organization->delete();
+        $animal->delete();
 
         session()->flash('alert-success', 'Deletado com sucesso!');
         return redirect()->back();
