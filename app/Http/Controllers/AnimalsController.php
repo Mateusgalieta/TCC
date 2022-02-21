@@ -67,9 +67,9 @@ class AnimalsController extends Controller
     public function transfers()
     {
         $organization_id = auth()->user()->organization_id;
-        $transfers_list = Transfer::where('toOrganization', $organization_id)
+            $transfers_list = Transfer::where('status', 'AGUARDANDO')
+            ->where('toOrganization', $organization_id)
             ->orWhere('fromOrganization', $organization_id)
-            ->where('status', 'AGUARDANDO')
             ->paginate();
 
         return view('animal.transfers', [
@@ -168,6 +168,31 @@ class AnimalsController extends Controller
             activity()->log('Solicitação de transferência aprovada');
 
             session()->flash('alert-success', 'Aprovado com sucesso!');
+            return redirect()->route('animal.transfers');
+        }
+
+        session()->flash('alert-danger', 'Ocorreu um erro');
+        return redirect()->route('animal.transfers');
+    }
+
+    /**
+     * Method to refuse transfer animal into two organization
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function refuseTransfer($transfer_id)
+    {
+        $organization_id = auth()->user()->organization_id;
+        $transfer = Transfer::findOrFail($transfer_id);
+
+        if($transfer){
+            $transfer->update([
+                'status' => 'REPROVADO',
+            ]);
+
+            activity()->log('Solicitação de transferência reprovada');
+
+            session()->flash('alert-success', 'Reprovada com sucesso!');
             return redirect()->route('animal.transfers');
         }
 
